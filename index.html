@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  ============================================================
+  EDIT HERE: organization name and site title.
+  Change ORG_NAME below (and the <title> tag) to customize.
+  ============================================================
+-->
+<script>
+  window.SITE_CONFIG = {
+    ORG_NAME: "Your Organization",
+    SITE_TITLE: "Medical Director Leadership Coaching",
+    ROSTER_SIZE: 15,
+    STORAGE_KEY: "md-leadership-coaching-v1"
+  };
+</script>
+<title>Medical Director Leadership Coaching</title>
+<meta name="description" content="Leadership coaching toolkit for medical directors: informal DISC-style self-assessment, leadership style assessment, communication guides, and difficult conversation practice.">
+<style>
+:root{
+  --bg:#f4f7f7; --surface:#ffffff; --surface-2:#eef4f4; --line:#d9e3e4; --line-strong:#b9c9cb;
+  --ink:#1b2a31; --ink-2:#3f525b; --muted:#5d6f77;
+  --brand:#0e5e6a; --brand-2:#177a87; --brand-soft:#dcefef; --brand-ink:#0a4750;
+  --accent:#3a6ea5; --ok:#2e7d4f; --warn:#9a5b00; --danger:#a33a3a;
+  --d:#0b6fa0; --i:#c26a1a; --s:#23895a; --c:#7a55c4;
+  --radius:12px; --radius-sm:8px; --shadow:0 1px 2px rgba(16,40,48,.06),0 4px 14px rgba(16,40,48,.06);
+  --focus:0 0 0 3px #ffffff,0 0 0 5px #1d6fb8;
+  --maxw:1100px;
+  font-family: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.55;-webkit-text-size-adjust:100%}
+a{color:var(--accent)}
+h1,h2,h3,h4{line-height:1.25;margin:0 0 .5em;color:var(--ink)}
+h1{font-size:clamp(1.6rem,3.5vw,2.2rem)}
+h2{font-size:clamp(1.3rem,2.6vw,1.65rem)}
+h3{font-size:1.15rem}
+h4{font-size:1rem}
+p{margin:0 0 .9em}
+ul{margin:0 0 .9em;padding-left:1.25em}
+li{margin:.2em 0}
+.skip{position:absolute;left:-999px;top:0;background:var(--brand);color:#fff;padding:.6em 1em;z-index:100;border-radius:0 0 8px 0}
+.skip:focus{left:0}
+:focus-visible{outline:none;box-shadow:var(--focus);border-radius:6px}
+.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Header and nav */
+header.site{background:linear-gradient(135deg,#0b4f59,#14707c);color:#fff}
+.hwrap{max-width:var(--maxw);margin:0 auto;padding:18px 20px 0}
+.brandrow{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.14);display:grid;place-items:center;flex:none}
+.brandtext .org{font-size:.85rem;opacity:.85;letter-spacing:.02em}
+.brandtext .title{font-size:clamp(1.02rem,3.6vw,1.2rem);font-weight:650}
+nav.tabs{display:flex;gap:2px;overflow-x:auto;margin-top:14px;scrollbar-width:thin;-webkit-overflow-scrolling:touch}
+nav.tabs button{appearance:none;border:0;background:transparent;color:#d9eef0;font:inherit;font-size:.95rem;font-weight:550;padding:11px 14px;border-radius:10px 10px 0 0;cursor:pointer;white-space:nowrap}
+nav.tabs button:hover{background:rgba(255,255,255,.1);color:#fff}
+nav.tabs button[aria-selected="true"]{background:var(--bg);color:var(--brand-ink)}
+nav.tabs button:focus-visible{box-shadow:inset 0 0 0 3px #ffd780}
+.activebar{background:var(--surface);border-bottom:1px solid var(--line)}
+.activebar .inner{max-width:var(--maxw);margin:0 auto;padding:10px 20px;display:flex;gap:10px 16px;align-items:center;flex-wrap:wrap;font-size:.93rem;color:var(--ink-2)}
+.activebar label{font-weight:600;color:var(--ink)}
+.activebar .status{display:flex;gap:6px;flex-wrap:wrap}
+
+main{max-width:var(--maxw);margin:0 auto;padding:24px 20px 64px}
+section[role="tabpanel"]{animation:fade .18s ease}
+@keyframes fade{from{opacity:.85;transform:translateY(3px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Components */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+.card + .card{margin-top:16px}
+.stack > * + *{margin-top:16px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(min(250px,100%),1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr))}
+.lead{font-size:1.08rem;color:var(--ink-2);max-width:70ch}
+.muted{color:var(--muted)}
+.small{font-size:.9rem}
+.hero{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:28px;box-shadow:var(--shadow);display:grid;gap:20px;grid-template-columns:1.4fr 1fr;align-items:center}
+@media (max-width:760px){.hero{grid-template-columns:1fr;padding:20px}}
+.btn{appearance:none;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--brand);background:var(--brand);color:#fff;font:inherit;font-weight:600;font-size:.95rem;padding:9px 16px;border-radius:10px;cursor:pointer;text-decoration:none;line-height:1.2;white-space:nowrap}
+.btn:hover{background:var(--brand-ink)}
+.btn.secondary{background:var(--surface);color:var(--brand-ink);border-color:var(--line-strong)}
+.btn.secondary:hover{background:var(--surface-2)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--brand-ink);padding:7px 10px}
+.btn.ghost:hover{background:var(--surface-2)}
+.btn.danger{background:var(--surface);color:var(--danger);border-color:#e2bcbc}
+.btn.danger:hover{background:#fbefef}
+.btn.sm{font-size:.85rem;padding:6px 10px;border-radius:8px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:600;padding:3px 10px;border-radius:999px;background:var(--surface-2);color:var(--ink-2);border:1px solid var(--line)}
+.pill.ok{background:#e5f3ea;color:#1f5e3a;border-color:#c3e1cd}
+.pill.todo{background:#fbf3e6;color:#7a4a00;border-color:#efd9b5}
+.note{border-left:4px solid var(--brand-2);background:var(--brand-soft);padding:12px 16px;border-radius:0 10px 10px 0;color:var(--brand-ink)}
+.note.warn{border-color:#c98a2b;background:#fdf5e8;color:#5e3c05}
+.dot{display:inline-block;width:12px;height:12px;border-radius:3px;flex:none}
+.typechip{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:9px;color:#fff;font-weight:750;font-size:1.05rem;flex:none}
+.bg-D{background:var(--d)} .bg-I{background:var(--i)} .bg-S{background:var(--s)} .bg-C{background:var(--c)}
+.bd-D{border-top:5px solid var(--d)} .bd-I{border-top:5px solid var(--i)} .bd-S{border-top:5px solid var(--s)} .bd-C{border-top:5px solid var(--c)}
+.cardhead{display:flex;gap:12px;align-items:center;margin-bottom:10px}
+.cardhead h3{margin:0}
+.kicker{font-size:.78rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--brand-2);margin-bottom:6px}
+dl.kv{margin:0} dl.kv dt{font-weight:650;margin-top:10px;color:var(--ink)} dl.kv dd{margin:2px 0 0;color:var(--ink-2)}
+.words{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:10px}
+@media (max-width:520px){.words{grid-template-columns:1fr}}
+.words div{background:var(--surface-2);border-radius:10px;padding:10px 12px}
+.words h4{font-size:.85rem;margin-bottom:4px}
+.words ul{margin:0;padding-left:1.1em;font-size:.93rem}
+.use h4{color:var(--ok)} .avoid h4{color:var(--danger)}
+blockquote{margin:8px 0;padding:10px 14px;background:var(--surface-2);border-radius:10px;border-left:3px solid var(--line-strong);color:var(--ink-2)}
+details{border:1px solid var(--line);border-radius:10px;background:var(--surface);margin-top:10px}
+details > summary{cursor:pointer;padding:12px 14px;font-weight:600;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px}
+details > summary::-webkit-details-marker{display:none}
+details > summary::after{content:"+";font-size:1.2rem;color:var(--muted)}
+details[open] > summary::after{content:"\2212"}
+details .dbody{padding:0 14px 14px}
+
+/* Quiz */
+.quizhead{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+.progress{height:8px;background:var(--surface-2);border-radius:99px;overflow:hidden;border:1px solid var(--line);min-width:200px;flex:1;max-width:340px}
+.progress > span{display:block;height:100%;background:var(--brand-2);border-radius:99px;transition:width .2s}
+.scalekey{font-size:.85rem;color:var(--muted)}
+fieldset.q{border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;margin:0 0 10px;background:var(--surface)}
+fieldset.q.answered{border-color:#bcd7d9;background:#fbfdfd}
+fieldset.q.missing{border-color:#d9a441;box-shadow:0 0 0 2px #f6e3bd}
+fieldset.q legend{padding:0;font-weight:550;float:left;width:100%;margin-bottom:10px}
+fieldset.q legend .num{color:var(--muted);font-weight:600;margin-right:6px}
+.likert{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;clear:both}
+.likert label{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line-strong);border-radius:9px;padding:8px 4px;cursor:pointer;font-size:.8rem;color:var(--ink-2);background:var(--surface);min-height:52px;line-height:1.2}
+.likert label b{font-size:1rem;color:var(--ink)}
+.likert input{position:absolute;opacity:0;width:1px;height:1px}
+.likert label:hover{border-color:var(--brand-2);background:var(--surface-2)}
+.likert input:checked + span{color:#fff}
+.likert label:has(input:checked){background:var(--brand);border-color:var(--brand);color:#fff}
+.likert label:has(input:checked) b{color:#fff}
+.likert label:has(input:focus-visible){box-shadow:var(--focus)}
+@media (max-width:520px){.likert label .lbl{display:none}.likert label{min-height:44px}}
+.submitbar{position:sticky;bottom:0;background:rgba(244,247,247,.96);backdrop-filter:blur(4px);padding:12px 0;border-top:1px solid var(--line);margin-top:10px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+
+/* Charts */
+.chart{margin:6px 0 4px}
+.chart .row{display:grid;grid-template-columns:150px 1fr 48px;gap:10px;align-items:center;padding:5px 0}
+@media (max-width:520px){.chart .row{grid-template-columns:1fr 42px;gap:4px 10px}.chart .lab{grid-column:1/-1}}
+.chart .lab{font-size:.9rem;color:var(--ink);display:flex;align-items:center;gap:8px;font-weight:550;min-width:0;overflow-wrap:anywhere}
+.chart .track{height:18px;background:var(--surface-2);border-radius:4px;position:relative}
+.chart .bar{height:100%;border-radius:0 4px 4px 0;min-width:3px;transition:width .4s}
+.chart .val{font-variant-numeric:tabular-nums;font-size:.9rem;color:var(--ink-2);text-align:right}
+.chart .row.top .lab{font-weight:750}
+.charttitle{font-size:.9rem;font-weight:650;color:var(--ink-2);margin-bottom:4px}
+.resultbanner{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.bigtype{display:flex;gap:10px;align-items:center}
+.bigtype .typechip{width:52px;height:52px;font-size:1.5rem;border-radius:12px}
+
+/* Tables / dashboard */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.93rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:middle}
+th{background:var(--surface-2);font-size:.82rem;text-transform:uppercase;letter-spacing:.04em;color:var(--ink-2)}
+tr:last-child td{border-bottom:0}
+tr.isactive td{background:#f1f8f8}
+input[type=text],input[type=search],select,textarea{font:inherit;color:var(--ink);border:1px solid var(--line-strong);border-radius:8px;padding:7px 10px;background:#fff;max-width:100%}
+textarea{width:100%;min-height:84px;resize:vertical;line-height:1.45}
+td input[type=text]{width:100%;min-width:150px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:16px}
+.stat .n{font-size:1.9rem;font-weight:700;color:var(--brand-ink);line-height:1.1}
+.stat .l{font-size:.85rem;color:var(--muted)}
+
+/* Conversations */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:step}
+@media (max-width:900px){.steps{grid-template-columns:1fr 1fr}}
+@media (max-width:520px){.steps{grid-template-columns:1fr}}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px;position:relative}
+.step .sn{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--brand);color:#fff;font-weight:700;font-size:.9rem;margin-bottom:6px}
+.step h3{font-size:1rem}
+.step ul{font-size:.9rem;padding-left:1.1em;margin:0}
+.scenlist{display:grid;gap:8px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.scenlist button{appearance:none;font:inherit;text-align:left;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 12px;cursor:pointer;font-weight:600;font-size:.92rem;color:var(--ink)}
+.scenlist button span{display:block;font-weight:400;font-size:.8rem;color:var(--muted)}
+.scenlist button[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);box-shadow:inset 0 0 0 1px var(--brand)}
+.seg{display:inline-flex;border:1px solid var(--line-strong);border-radius:10px;overflow:hidden;flex-wrap:wrap}
+.seg button{appearance:none;font:inherit;font-size:.9rem;font-weight:600;border:0;background:var(--surface);padding:8px 12px;cursor:pointer;color:var(--ink-2);display:flex;gap:6px;align-items:center}
+.seg button + button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--brand);color:#fff}
+.opener{font-size:1.02rem;background:#fff;border:1px solid var(--line);border-left:4px solid var(--brand-2);border-radius:0 10px 10px 0;padding:12px 14px;margin:8px 0}
+.turn{border:1px solid var(--line);border-radius:10px;padding:12px 14px;margin-top:12px;background:var(--surface)}
+.turn .they{font-weight:600;margin-bottom:8px}
+.turn .they::before{content:"They say: ";color:var(--muted);font-weight:500}
+.model{margin-top:8px;background:#eef6f0;border:1px solid #cfe5d6;border-radius:10px;padding:10px 12px;font-size:.95rem}
+.savedmsg{font-size:.85rem;color:var(--ok);min-height:1.2em}
+.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#14323a;color:#fff;padding:10px 18px;border-radius:10px;box-shadow:0 6px 24px rgba(0,0,0,.2);z-index:200;font-size:.93rem;max-width:90vw}
+footer{max-width:var(--maxw);margin:0 auto;padding:0 20px 40px;color:var(--muted);font-size:.85rem}
+.empty{text-align:center;padding:30px 20px;color:var(--muted)}
+.twocol{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+@media (max-width:760px){.twocol{grid-template-columns:minmax(0,1fr)}}
+hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
+
+@media print{
+  header.site nav, .activebar, .noprint, footer, .submitbar{display:none!important}
+  body{background:#fff} .card,.hero{box-shadow:none;break-inside:avoid}
+  main{padding:0}
+  section[role="tabpanel"][hidden]{display:none!important}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to main content</a>
+<header class="site">
+  <div class="hwrap">
+    <div class="brandrow">
+      <div class="logo" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.4-9.3-9A5.2 5.2 0 0 1 12 6a5.2 5.2 0 0 1 9.3 6c-2.3 4.6-9.3 9-9.3 9z"/><path d="M7.5 12h2.5l1.5-2.5 2 5 1.5-2.5h1.5"/></svg>
+      </div>
+      <div class="brandtext">
+        <div class="org" id="orgName">Your Organization</div>
+        <div class="title" id="siteTitle">Medical Director Leadership Coaching</div>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Main sections" id="tabs">
+      <button role="tab" id="tab-home" aria-controls="home" aria-selected="true">Home</button>
+      <button role="tab" id="tab-disc" aria-controls="disc" aria-selected="false" tabindex="-1">DISC Assessment</button>
+      <button role="tab" id="tab-leadership" aria-controls="leadership" aria-selected="false" tabindex="-1">Leadership Styles</button>
+      <button role="tab" id="tab-profile" aria-controls="profile" aria-selected="false" tabindex="-1">My Profile</button>
+      <button role="tab" id="tab-communicate" aria-controls="communicate" aria-selected="false" tabindex="-1">Communicating by Type</button>
+      <button role="tab" id="tab-conversations" aria-controls="conversations" aria-selected="false" tabindex="-1">Difficult Conversations</button>
+      <button role="tab" id="tab-dashboard" aria-controls="dashboard" aria-selected="false" tabindex="-1">Coach Dashboard</button>
+    </nav>
+  </div>
+</header>
+<div class="activebar">
+  <div class="inner">
+    <label for="activeSelect">Working as:</label>
+    <select id="activeSelect" aria-describedby="activeHelp"></select>
+    <span class="status" id="activeStatus" aria-live="polite"></span>
+    <span class="muted small" id="activeHelp">Results save to this browser only.</span>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+  <section id="home" role="tabpanel" aria-labelledby="tab-home"></section>
+  <section id="disc" role="tabpanel" aria-labelledby="tab-disc" hidden></section>
+  <section id="leadership" role="tabpanel" aria-labelledby="tab-leadership" hidden></section>
+  <section id="profile" role="tabpanel" aria-labelledby="tab-profile" hidden></section>
+  <section id="communicate" role="tabpanel" aria-labelledby="tab-communicate" hidden></section>
+  <section id="conversations" role="tabpanel" aria-labelledby="tab-conversations" hidden></section>
+  <section id="dashboard" role="tabpanel" aria-labelledby="tab-dashboard" hidden></section>
+</main>
+<footer>
+  <p><strong>Privacy:</strong> Everything on this site runs in your browser. Results are stored in this browser's local storage and never sent to a server. Use Export to share results with your coach.</p>
+  <p>The DISC-style assessment here is an informal, original self-reflection tool based on the four public-domain DISC dimensions. It is not the licensed Everything DiSC&reg; or any other commercial instrument and is not validated for selection, evaluation, or employment decisions.</p>
+</footer>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<script>
+/* ===================== CONTENT DATA ===================== */
+"use strict";
+const DISC_ORDER = ["D","I","S","C"];
+
+const LIKERT_DISC = [
+  {v:1,l:"Not like me"},{v:2,l:"A little"},{v:3,l:"Somewhat"},{v:4,l:"Mostly"},{v:5,l:"Very like me"}
+];
+const LIKERT_LEAD = [
+  {v:1,l:"Rarely"},{v:2,l:"Sometimes"},{v:3,l:"Often"},{v:4,l:"Usually"},{v:5,l:"Almost always"}
+];
+
+/* 24 original items, 6 per dimension, interleaved */
+const DISC_ITEMS = [
+  {t:"D",q:"I make decisions quickly, even when I do not have every detail."},
+  {t:"I",q:"I enjoy rallying people around a new idea."},
+  {t:"S",q:"I prefer steady, predictable routines over frequent change."},
+  {t:"C",q:"I want to see the data before I support a decision."},
+  {t:"D",q:"I am comfortable challenging a colleague's plan when I think it falls short."},
+  {t:"I",q:"I often think out loud and shape my ideas through conversation."},
+  {t:"S",q:"Colleagues often come to me when they need someone to listen."},
+  {t:"C",q:"I notice errors and inconsistencies that others miss."},
+  {t:"D",q:"I like taking charge when a situation is stalled or unclear."},
+  {t:"I",q:"I build rapport easily with staff I have only just met."},
+  {t:"S",q:"Before a change, I think through how it will affect each person on the team."},
+  {t:"C",q:"I prefer clear standards, protocols, and written expectations."},
+  {t:"D",q:"I judge a good week mainly by the results we achieved."},
+  {t:"I",q:"I like recognizing people publicly for their contributions."},
+  {t:"S",q:"I would rather keep the peace than win an argument."},
+  {t:"C",q:"I would rather take extra time than hand off work that is not accurate."},
+  {t:"D",q:"I get impatient when meetings spend too long on discussion."},
+  {t:"I",q:"I bring energy and optimism when a team is discouraged."},
+  {t:"S",q:"I am patient with colleagues who need more time to learn something new."},
+  {t:"C",q:"I ask a lot of clarifying questions before I commit to a plan."},
+  {t:"D",q:"I would rather take a calculated risk than wait for certainty."},
+  {t:"I",q:"I would rather persuade people than direct them."},
+  {t:"S",q:"I value loyalty and long-term working relationships above quick wins."},
+  {t:"C",q:"I am uneasy when decisions are made on gut feeling alone."}
+];
+
+const DISC = {
+  D:{name:"Dominance", short:"Direct and decisive",
+    summary:"You move toward problems, decide quickly, and focus on outcomes. People experience you as confident, candid, and action oriented.",
+    strengths:["Makes timely decisions under pressure","Names problems early and plainly","Drives accountability and results","Comfortable with conflict and pushback"],
+    watchouts:["Can sound abrupt or dismissive when rushed","May skip the input that builds buy-in","Can underestimate the emotional impact of change","Under stress: becomes controlling and impatient"],
+    motivators:"Autonomy, challenge, visible progress, and authority to act.",
+    natural:["Use your decisiveness in crises, rapid response, and stalled projects where a clear call unblocks the team.","Lead with the goal and the deadline, then deliberately ask, \"What am I missing?\" before you close.","Channel your candor into specific, behavior-based feedback rather than broad judgments.","Schedule recovery time after high-intensity periods so urgency does not become your default tone."],
+    comm:{
+      thinks:"Bottom line first. Wants to know what the problem is, what it costs, and what you want them to do. Respects competence and directness; loses patience with hedging.",
+      needs:["A clear, brief statement of the issue in the first minute","Respect for their expertise and autonomy","Choices about how to fix it, with a firm what and when","Facts over feelings, and no lecturing"],
+      use:["\"Here is the issue, and here is what I need.\"","\"You decide how; I need it by Friday.\"","\"What is your plan to fix this?\"","\"Let's agree on the outcome.\""],
+      avoid:["Long warm-up or small talk before the point","\"I'm sorry to bring this up, but maybe...\"","Vague requests like \"try to do better\"","Telling them exactly how to do their job"],
+      examples:["A trauma surgeon who pushes back on a new checklist: frame it as a tool that protects their outcomes and their time, give the data in two sentences, and ask them to co-own the rollout.","An ED physician who escalates loudly about boarding: acknowledge the urgency, state what you can and cannot change, and agree on one action each with a date."]
+    }},
+  I:{name:"Influence", short:"Expressive and persuasive",
+    summary:"You lead through relationships, enthusiasm, and storytelling. People experience you as approachable, optimistic, and energizing.",
+    strengths:["Builds trust and rapport quickly","Rallies people around a shared vision","Reads the room and lifts morale","Strong at recognition and informal influence"],
+    watchouts:["May avoid delivering unwelcome news","Can overpromise or under-follow-through","Details and documentation may slip","Under stress: becomes disorganized or overly persuasive"],
+    motivators:"Recognition, connection, collaboration, and freedom to try new ideas.",
+    natural:["Use your connection skills to surface concerns early, before they become formal complaints.","Pair your enthusiasm with a written follow-up after every important conversation so commitments stick.","Practice saying the hard sentence in the first two minutes, then use warmth to support it.","Bring a detail-oriented partner (often a C) into projects to balance your momentum."],
+    comm:{
+      thinks:"Big picture and people first. Processes by talking. Cares how they are seen by colleagues and wants the conversation to feel collaborative, not like a reprimand.",
+      needs:["Warmth and a relationship-first opening","Room to talk it through and share their side","Reassurance about their standing and reputation","Clear, written next steps so the energy turns into action"],
+      use:["\"I value what you bring to this team.\"","\"Help me understand what's been going on.\"","\"How do you think we could make this work?\"","\"Let's write down what we agreed.\""],
+      avoid:["Cold, scripted, or purely data-driven openings","Criticizing them in front of others","Overwhelming detail with no story","Leaving the meeting without specific commitments"],
+      examples:["A popular pediatric hospitalist who is consistently late to rounds: open by acknowledging how much families value them, then be specific about the impact on residents and nurses, and co-create one concrete fix.","A charismatic primary care lead who promised a new workflow but never delivered: affirm the idea, then agree on a written plan with owners and dates."]
+    }},
+  S:{name:"Steadiness", short:"Supportive and steady",
+    summary:"You lead through consistency, loyalty, and care for people. People experience you as calm, patient, and dependable.",
+    strengths:["Creates psychological safety and trust","Listens deeply and notices how people are doing","Reliable, consistent follow-through","Steadies teams during disruption"],
+    watchouts:["May delay hard conversations to protect harmony","Can absorb too much work rather than delegate","Slower to embrace sudden change","Under stress: goes quiet, withdraws, or gives in"],
+    motivators:"Stability, sincere appreciation, clear expectations, and time to adjust.",
+    natural:["Use your listening and calm as an asset in emotionally charged conversations, such as adverse events and burnout.","Set a personal rule: raise performance concerns within one week of noticing them.","State your view plainly before inviting consensus so people know where you stand.","When change is coming, use your trust capital to explain the why and walk people through the how."],
+    comm:{
+      thinks:"How will this affect people and stability? Wants to understand the reason for change and what happens next. May agree outwardly while worrying privately.",
+      needs:["A calm, private, unhurried setting","Sincere reassurance about the relationship","A step-by-step plan and time to process","An explicit invitation to share concerns, because they may not volunteer them"],
+      use:["\"I want to support you through this.\"","\"Here is what will stay the same.\"","\"Take a day to think about it, and let's talk Thursday.\"","\"What worries you most about this?\""],
+      avoid:["Surprise meetings or springing news in public","Pressuring for an immediate answer","Abrupt tone or rapid-fire demands","Assuming silence means agreement"],
+      examples:["A long-tenured anesthesiologist who is quietly resisting a new scheduling system: explain the reason, show what stays the same, give a timeline with support, and check back in a few days.","A family physician showing signs of burnout who keeps saying \"I'm fine\": create a private, unhurried space, name what you have noticed with care, and offer specific support options."]
+    }},
+  C:{name:"Conscientiousness", short:"Careful and analytical",
+    summary:"You lead through expertise, accuracy, and high standards. People experience you as thorough, logical, and principled.",
+    strengths:["Rigorous, evidence-based decisions","Protects quality and patient safety","Builds clear processes and standards","Calm, objective analysis in complex situations"],
+    watchouts:["Can over-analyze and delay decisions","May come across as critical or distant","Can focus on being right over being heard","Under stress: becomes rigid, withdrawn, or perfectionistic"],
+    motivators:"Quality, competence, clear criteria, and time to do things correctly.",
+    natural:["Use your analytical strength to frame problems with data so conversations stay objective and fair.","Set a decision deadline in advance and decide with the best available information, not perfect information.","Open with appreciation or curiosity before you present the analysis, so precision does not read as criticism.","Translate standards into the patient story behind them; that is what moves most people."],
+    comm:{
+      thinks:"Is this accurate, fair, and logical? Wants the evidence, the criteria, and the process. Will scrutinize your facts, and a single error can undermine your credibility.",
+      needs:["Specific data and examples, prepared in advance","A logical, organized conversation with clear criteria","Time to review information and respond thoughtfully","Fair, consistent standards applied to everyone"],
+      use:["\"Here is the data I reviewed.\"","\"What would you need to see to evaluate this?\"","\"Let's walk through the criteria.\"","\"Take time to review it, and send me your questions.\""],
+      avoid:["Generalizations like \"always\" or \"everyone says\"","Emotional appeals without evidence","Rushing them to decide on the spot","Unclear or shifting expectations"],
+      examples:["A pathologist who disputes a quality report: share the methodology and case-level data ahead of time, invite their critique of the method, and agree on a fair review process.","A meticulous cardiologist frustrated by a new EHR order set: acknowledge their specific concerns, show how you will measure the impact, and give them a formal channel for feedback."]
+    }}
+};
+
+/* ADAPT[you][them]: how a director with primary style "you" can adapt to "them" */
+const ADAPT = {
+  D:{D:"Two D styles can turn a conversation into a contest. Agree on the shared goal first, let them own the how, and avoid escalating tone for tone.",
+     I:"Slow down and connect before you correct. Give them airtime, acknowledge their ideas, and turn agreements into written commitments.",
+     S:"Your pace can feel like pressure. Preview the topic, lower your intensity, explain the why, and give them time before you ask for a decision.",
+     C:"Bring data, not just conclusions. Expect questions and treat them as diligence, not resistance. Agree on criteria before you push for speed."},
+  I:{D:"Get to the point within the first minute. Trim the story, lead with results and options, and be ready to be challenged without taking it personally.",
+     I:"You will enjoy each other, which can let the hard part slide. Name the issue explicitly and close with written owners and dates.",
+     S:"Your energy is welcome, but tone it down for serious topics. Be sincere, slow down, and ask directly about their concerns.",
+     C:"Prepare specifics in advance. Replace enthusiasm with evidence, stay organized, and follow up in writing with the details."},
+  S:{D:"Do not soften the message until it disappears. State the issue in one sentence, stay calm if they push, and hold your position.",
+     I:"Match some of their warmth and let them talk, then gently steer back to the specific behavior and agreed actions.",
+     S:"Two S styles may both avoid the hard part. Agree up front that this conversation is about something difficult, and say it plainly.",
+     C:"Your care is valued, but they need structure. Bring facts, an agenda, and clear criteria, and let them take time to analyze."},
+  C:{D:"Lead with your conclusion and recommendation, then offer detail only as needed. Keep it brief and focused on outcomes.",
+     I:"Open with appreciation and the big picture before the data. Keep slides and numbers light, and let them talk through ideas.",
+     S:"Your precision can feel cold. Start with the relationship, explain the impact on people, and offer step-by-step support.",
+     C:"You will speak the same language, but may debate details endlessly. Agree on the decision criteria and a deadline at the start."}
+};
+
+/* Natural leadership-style affinities by DISC type (for combined insight) */
+const DISC_LEAD_AFFINITY = {D:["Commanding","Pacesetting","Visionary"], I:["Visionary","Affiliative","Democratic"], S:["Affiliative","Coaching","Democratic"], C:["Pacesetting","Democratic","Coaching"]};
+
+const LEAD_ORDER = ["Visionary","Coaching","Affiliative","Democratic","Pacesetting","Commanding"];
+
+const LEAD_ITEMS = [
+  {t:"Visionary",q:"I connect day-to-day clinical work to a clear picture of where our department is headed."},
+  {t:"Coaching",q:"I have regular conversations with physicians about their longer-term career goals."},
+  {t:"Affiliative",q:"I check in on how my team is doing as people, not only as clinicians."},
+  {t:"Democratic",q:"I seek input from frontline physicians before making decisions that affect them."},
+  {t:"Pacesetting",q:"I set a high personal standard for clinical work and expect others to match it."},
+  {t:"Commanding",q:"In an urgent situation, I give clear directives and expect immediate follow-through."},
+  {t:"Visionary",q:"When I introduce a change, I explain the purpose before I get into the details."},
+  {t:"Coaching",q:"I let a colleague work through a problem themselves when it will help them grow."},
+  {t:"Affiliative",q:"After a difficult shift or a bad outcome, my first focus is supporting the team."},
+  {t:"Democratic",q:"I use meetings to build consensus rather than to announce decisions."},
+  {t:"Pacesetting",q:"I step in and do the work myself when someone is not meeting the bar."},
+  {t:"Commanding",q:"I am comfortable making a call people disagree with when patient safety is at stake."},
+  {t:"Visionary",q:"I give people freedom to choose how they reach a goal, as long as the direction is clear."},
+  {t:"Coaching",q:"I ask questions that help people find their own answers instead of giving them mine."},
+  {t:"Affiliative",q:"I invest time in building trust and repairing strained working relationships."},
+  {t:"Democratic",q:"I change my plan when the group raises a better idea."},
+  {t:"Pacesetting",q:"I track performance metrics closely and act quickly when they slip."},
+  {t:"Commanding",q:"I set firm consequences when expectations are not met."}
+];
+
+const LEAD = {
+  Visionary:{phrase:"Come with me.",
+    desc:"Mobilizes people toward a compelling shared direction while leaving room for how they get there.",
+    strengths:["Creates meaning and alignment around change","Helps physicians see how their work fits the mission","Gives autonomy within a clear direction"],
+    blind:["Vision can feel disconnected from frontline reality","Can underinvest in execution details","Less credible if you are seen as less clinically expert than the group"],
+    works:"Launching a new service line, a cultural reset after a merger, or recruiting physicians to a quality initiative. Most effective when a department lacks direction.",
+    backfires:"With a highly experienced group who feel the vision ignores staffing, throughput, or inbox realities. Inspiring talk without resources breeds cynicism.",
+    build:["Write a three-sentence picture of your department in two years and share it at your next meeting.","Connect every change announcement to a patient or colleague story.","Ask your team, \"What would make you proud to work here in two years?\""]},
+  Coaching:{phrase:"Try this.",
+    desc:"Develops people for the long term by connecting their goals to the work and asking more than telling.",
+    strengths:["Grows future leaders and improves retention","Builds ownership and self-awareness","Strengthens trust through regular one-to-ones"],
+    blind:["Takes time that may not exist during a crisis","Does not work with someone unwilling to change","Can drift into vague encouragement without accountability"],
+    works:"Developing an emerging physician leader, helping a capable clinician improve a specific skill, or supporting a colleague after a near miss who wants to learn.",
+    backfires:"During an acute safety issue that needs an immediate directive, or with a physician who lacks insight and needs clear expectations first.",
+    build:["Hold a 20-minute development conversation with one physician each month.","Replace one piece of advice per day with a question: \"What options do you see?\"","End coaching conversations with a specific commitment and a check-in date."]},
+  Affiliative:{phrase:"People come first.",
+    desc:"Builds harmony, emotional bonds, and belonging, especially during stress or after conflict.",
+    strengths:["Restores morale after adverse events or crises","Builds psychological safety","Strengthens loyalty and team cohesion"],
+    blind:["Praise without correction can let performance problems persist","Avoids conflict that needs to happen","Can feel unclear on direction"],
+    works:"After a patient death, a difficult code, a staffing crisis, or a period of conflict. Essential as a foundation for burnout prevention.",
+    backfires:"When a physician is underperforming or behaving disruptively and needs clear feedback. Used alone, it can signal that standards are optional.",
+    build:["Open team meetings with a brief check-in or recognition of specific work.","Send one specific note of thanks each week.","After a hard event, ask \"How are you doing?\" before \"What happened?\""]},
+  Democratic:{phrase:"What do you think?",
+    desc:"Builds commitment through participation, drawing on the group's knowledge to make decisions.",
+    strengths:["Generates buy-in from physicians who value autonomy","Surfaces frontline expertise and hidden risks","Builds a culture of shared ownership"],
+    blind:["Slow, with risk of endless meetings","Can look like indecision","Frustrating when the decision has already been made elsewhere"],
+    works:"Designing a new call schedule, choosing a workflow, or setting department priorities where physician expertise improves the outcome.",
+    backfires:"In a crisis, when a mandate is not negotiable, or when input is requested for show. Physicians notice false consultation quickly.",
+    build:["Before deciding, ask three frontline physicians for input and report back how you used it.","Be explicit about decision rights: \"I'm deciding, but I want your input\" versus \"We decide together.\"","Set a deadline for input so participation does not stall action."]},
+  Pacesetting:{phrase:"Do as I do, now.",
+    desc:"Sets and models high standards of performance, expecting excellence and speed from everyone.",
+    strengths:["Drives quality and efficiency in skilled, motivated teams","Credible role model of clinical excellence","Quickly spots and addresses performance gaps"],
+    blind:["Overwhelms and demoralizes over time","Leads to micromanagement and taking work back","A major contributor to burnout when overused"],
+    works:"Short bursts with a highly competent, motivated team, such as a quality sprint or a time-limited throughput push.",
+    backfires:"As a default style. In medicine it compounds burnout, discourages questions, and can suppress safety reporting when people fear judgment.",
+    build:["Use it for defined sprints with a clear end date.","Pair high standards with explicit support and resources.","Ask, \"What would help you hit this target?\" instead of stepping in."]},
+  Commanding:{phrase:"Do what I tell you.",
+    desc:"Demands immediate compliance and provides clear direction, especially in crises.",
+    strengths:["Essential in emergencies and true safety threats","Ends ambiguity quickly","Sets firm limits on unacceptable behavior"],
+    blind:["Erodes autonomy and engagement when overused","Shuts down input and speaking up","Feels authoritarian to experienced physicians"],
+    works:"Codes, disasters, an imminent patient safety threat, or a firm line on disruptive behavior that endangers patients or staff.",
+    backfires:"In routine operations or with high performers. It damages trust and teaches people to stop raising concerns.",
+    build:["Reserve it for safety and crises, and say so explicitly: \"This is a safety issue, so I'm making the call.\"","Afterward, debrief and explain your reasoning.","Practice a calm, firm voice for setting non-negotiable limits."]}
+};
+
+/* Difficult conversations framework */
+const FRAMEWORK = [
+  {n:"Prepare", items:["Gather specific facts, dates, and impact","Clarify the outcome you need","Check your assumptions and your own emotions","Anticipate their DISC style and adapt"]},
+  {n:"Open", items:["Name the purpose in the first minute","Be specific and neutral, not vague","Signal respect and shared goals","Keep the opening to two or three sentences"]},
+  {n:"Listen", items:["Ask an open question, then pause","Reflect back what you hear","Acknowledge emotion without debating it","Look for what you did not know"]},
+  {n:"Problem solve", items:["Restate the non-negotiable standard","Invite their ideas first","Agree on specific actions and support","Clarify consequences if needed"]},
+  {n:"Close and follow up", items:["Summarize agreements out loud","Confirm in writing within 24 hours","Set a check-in date","Recognize progress when it happens"]}
+];
+
+const SCENARIOS = [
+  {id:"under", title:"Underperforming physician", tag:"Performance",
+   context:"Dr. Rivera, a hospitalist, has had the highest length of stay and the most delinquent charts in the group for two consecutive quarters. Case managers have started escalating discharge delays. Dr. Rivera is well liked and clinically sound.",
+   goal:"Make the performance gap clear, understand the causes, and agree on a specific improvement plan with a check-in date.",
+   prep:["Bring two quarters of LOS and chart completion data compared with group medians","Identify two or three specific recent cases","Consider possible causes: workload, workflow, health, or personal factors","Decide what support you can offer, such as scribe time or EHR training"],
+   openers:{
+     D:"I want to talk about length of stay and chart completion. Your numbers have been the highest in the group for two quarters, and we need a plan to bring them in line by the end of next quarter. How do you want to approach it?",
+     I:"I appreciate how much patients and nurses enjoy working with you. I also want to talk about something that is getting in the way: your discharge timing and chart completion. Can we work through it together?",
+     S:"Thanks for making time. I want to talk privately about length of stay and charting. I'm raising it because I want to support you, and I'd like to understand what has been making it harder lately.",
+     C:"I've reviewed the last two quarters of length of stay and chart completion data, and I'd like to walk through it with you. I'll share the numbers and how they were calculated, and I want your read on what's driving them."},
+   turns:[
+     {they:"My patients are sicker than everyone else's. The data isn't adjusted for acuity.", model:"That's a fair question. I checked the case mix index, and it's close to the group average, but I'd like to look at it together. Even after adjusting, there's a gap we need to address. What else do you think is contributing?"},
+     {they:"I'm just slower because I'm thorough. I'm not going to rush patients out the door.", model:"I value your thoroughness, and I'm not asking you to compromise safety. I'm asking us to find where time is lost, such as discharge planning starting late or notes waiting until evening. Can we look at a few recent cases together?"},
+     {they:"Fine. What exactly do you want me to do?", model:"Let's agree on two things: start discharge planning by 10 a.m. on expected discharges, and close notes within 24 hours. I'll arrange time with our EHR trainer. Let's meet in four weeks to review the numbers together."}],
+   reflect:["Which part of the opening did you find hardest to say plainly?","How did you separate the behavior and data from your judgment of the person?","What support did you offer, and is it realistic?","What will you do if there is no improvement at the four-week check-in?"]},
+  {id:"disrupt", title:"Disruptive behavior", tag:"Professionalism",
+   context:"Dr. Chen, a high-volume orthopedic surgeon, raised their voice at a circulating nurse in the OR and threw an instrument onto the back table. Nursing filed a formal report. This is the second report in a year.",
+   goal:"Make clear that the behavior is unacceptable regardless of intent, understand context, and set firm expectations and consequences.",
+   prep:["Review the incident report and your organization's code of conduct","Know the history, including the prior report and how it was handled","Talk with HR or the medical staff office about process and documentation","Decide the non-negotiable expectation and the consequence of a recurrence"],
+   openers:{
+     D:"I need to talk with you about what happened in OR 4 on Tuesday. Raising your voice at a nurse and throwing an instrument is not acceptable here, and this is the second report this year. I want to hear your side, and then we need to agree on what happens next.",
+     I:"You're one of our most respected surgeons, and people look to you. That's why I need to talk about Tuesday in OR 4. The nurse filed a report about raised voices and a thrown instrument, and I want to hear what happened from you.",
+     S:"I want to talk with you privately about Tuesday in OR 4. A report was filed about raised voices and a thrown instrument. I'd like to understand what happened, and I also need to be clear about our expectations going forward.",
+     C:"I've received a formal report about an incident in OR 4 on Tuesday. I'd like to review the specific details with you, the relevant section of the code of conduct, and the process from here. Then I'd like your account of what happened."},
+   turns:[
+     {they:"The nurse handed me the wrong instrument twice. Patient safety was at risk. Someone had to say something.", model:"Speaking up about the instrument was right. How it was done is the problem. Raising your voice and throwing an instrument makes people less likely to speak up to you, and that is a safety risk too. What could you have done instead in that moment?"},
+     {they:"This is ridiculous. Nobody complains about the surgeons who don't bring in revenue.", model:"I hear that you feel singled out. This standard applies to everyone, and I'd have this same conversation with any physician. Your contribution is significant, and that's exactly why I need this to stop."},
+     {they:"Okay. What happens now?", model:"I'd like you to apologize to the nurse, and I'm referring you to our professionalism coaching program. I'll document this conversation. If it happens again, it goes to the medical staff process. Let's check in in 30 days."}],
+   reflect:["Did you stay firm on the behavior while staying curious about the context?","Did their reaction pull you toward softening, debating, or escalating?","Were the consequences clear and consistent with policy?","How will you follow up with the nurse and the OR team?"]},
+  {id:"safety", title:"Patient safety concern", tag:"Quality and safety",
+   context:"Two near misses in a month involved Dr. Okafor, an emergency physician: a delayed sepsis recognition and a high-risk medication order flagged by pharmacy. No patient harm occurred. Dr. Okafor has not raised either event.",
+   goal:"Address the pattern in a just culture frame, understand system and individual factors, and agree on next steps without creating fear of reporting.",
+   prep:["Review both event reports and any peer review findings","Separate system factors (staffing, EHR alerts, volume) from individual factors","Know your just culture framework: human error, at-risk behavior, or reckless behavior","Plan how to protect the reporters"],
+   openers:{
+     D:"I want to talk about two near misses from this month: the delayed sepsis recognition and the medication order pharmacy flagged. No one was harmed, and I want to keep it that way. Let's look at what happened and what needs to change.",
+     I:"I know you care deeply about your patients, which is why I want to talk about two near misses this month. I want to understand what was going on for you during those shifts and figure out together what would help.",
+     S:"I want to have a supportive conversation about two near misses this month. This is not about blame. I want to understand what was happening and how we can make those shifts safer for you and your patients.",
+     C:"I'd like to review two events from this month with you: the sepsis timeline on the 4th and the medication order on the 18th. I have the timelines and the system data. I'd like to go through them step by step and get your analysis."},
+   turns:[
+     {they:"We were completely slammed both nights. The department was understaffed.", model:"That matters, and I'll look into staffing on those nights. I also want to understand your part, because some of this is in our control. Walk me through what you saw when the patient arrived."},
+     {they:"Are you saying I'm unsafe? Is this going to peer review?", model:"I'm not saying you're unsafe. Near misses happen in busy departments, and talking about them openly is how we stay safe. I'll explain the review process honestly so there are no surprises. What would help you feel supported through it?"},
+     {they:"I didn't realize the sepsis alert had been dismissed. I'll be more careful.", model:"Thank you. Let's make that concrete. Would you review the sepsis bundle with our quality lead, and share what you learned at the next department meeting? I'll also raise the alert design with informatics."}],
+   reflect:["How did you balance accountability with psychological safety?","Did you explore system factors before concluding it was individual?","How did you respond to the fear behind their defensiveness?","What will make it more likely they report the next near miss themselves?"]},
+  {id:"burnout", title:"Burnout", tag:"Well-being",
+   context:"Dr. Kim, a previously engaged family physician, has become cynical in meetings, missed the last two department meetings, and has an inbox backlog of over 300 messages. A medical assistant mentioned Dr. Kim seemed close to tears last week.",
+   goal:"Show care, name what you have observed without diagnosing, explore what is driving it, and connect them with concrete support.",
+   prep:["Know your available resources: EAP, physician wellness program, peer support, schedule flexibility","Check workload data such as panel size, inbox volume, and after-hours EHR time","Choose a private time with no hard stop","Be ready to hear things you cannot fix right away"],
+   openers:{
+     D:"I'll get right to it because I care about how you're doing. I've noticed you've missed meetings and the inbox is backing up, which isn't like you. What's going on, and what would help most right now?",
+     I:"I've missed having you in our meetings, and I've been thinking about you. You've seemed weighed down lately. How are you really doing?",
+     S:"I wanted to find a quiet time to check in. I've noticed some changes, like missed meetings and a growing inbox, and I wanted to ask how you're doing. There's no agenda beyond that, and there's no rush.",
+     C:"I've noticed a few specific changes: two missed department meetings and an inbox over 300 messages, which is unusual for you. I'd like to understand what's driving it. I also have some workload data that might help us look at it objectively."},
+   turns:[
+     {they:"I'm fine. Just busy like everyone else.", model:"I hear you, and it is a busy time. I'm asking because I've noticed real changes and I care about you, not about the metrics. If things aren't fine, this is a safe place to say so."},
+     {they:"Honestly, I don't know how much longer I can keep doing this. The inbox never ends.", model:"Thank you for telling me. That takes courage. Let's take this seriously. I'd like to look at what we can change now, like inbox coverage or protected admin time, and I want to make sure you know about our physician wellness support."},
+     {they:"I don't want people to think I can't handle it.", model:"Asking for help is what good physicians do, and this stays between us. Many of our colleagues are feeling the same way. Can we meet again next week to see how the changes are working?"}],
+   reflect:["Did you resist the urge to jump straight to solutions?","How did you name observations without diagnosing or judging?","Which system factors are you willing to take on as a leader?","How will you follow up, and what would prompt you to escalate concern for their safety?"]},
+  {id:"peer", title:"Peer conflict", tag:"Team dynamics",
+   context:"The chiefs of anesthesia and general surgery, Dr. Patel and Dr. Nguyen, disagree about OR block time and first-case start delays. They now copy you on tense emails blaming each other, and staff have noticed.",
+   goal:"Move the conflict from email blame to a structured conversation about shared goals, data, and agreements.",
+   prep:["Meet with each person separately first to understand their view","Gather first-case start and block utilization data","Identify the shared goal both care about, such as patient access, safety, and staff morale","Plan a joint meeting with ground rules and a clear agenda"],
+   openers:{
+     D:"This conflict is costing us OR time and staff morale, and it needs to be resolved. I want us to leave today with specific agreements on first-case starts and block release. Let's start with what each of you needs.",
+     I:"You both care a lot about our patients and your teams, and I think there's more common ground here than the emails suggest. I'd like us to find it today and build a plan together.",
+     S:"I want to give you both space to be heard. The tension has been hard on everyone, including the OR staff. Let's take it step by step: what's working, what isn't, and what each of you needs.",
+     C:"I've pulled three months of first-case start times and block utilization. I'd like us to review the data together, agree on what's causing the delays, and set clear criteria for block release going forward."},
+   turns:[
+     {they:"The problem is anesthesia never has patients ready on time. That's just a fact.", model:"I hear that delays are frustrating. Let's look at what the data shows about where the time is lost, because it might be more than one cause. Dr. Patel, how do you see it?"},
+     {they:"I'm not going to sit here and be blamed for surgery's poor planning.", model:"Neither of you is here to be blamed. You're both here because I need you to solve this together. Let's agree that we're talking about processes, not people. Can we try that?"},
+     {they:"Fine, but I want something in writing.", model:"Absolutely. I'll summarize today's agreements on start times and block release and send them to you both by tomorrow. We'll review the data in 30 days, and future concerns come to me directly instead of by email."}],
+   reflect:["Did you stay neutral, and did both people feel heard?","How did you move from positions (blame) to interests (shared goals)?","What ground rules did you set for future disagreements?","What will you do if the email conflict continues?"]},
+  {id:"policy", title:"Unpopular policy change", tag:"Change leadership",
+   context:"Executive leadership has decided that all departments will adopt a new standardized weekend coverage model in 60 days. Your physicians had no input, and several are upset about the impact on their families. You have limited room to change the decision.",
+   goal:"Communicate the decision honestly, acknowledge the impact, clarify what can and cannot be influenced, and channel concerns into implementation.",
+   prep:["Understand the reasons behind the decision so you can explain them","Clarify what is fixed and what is still open, such as implementation details or hardship exceptions","Check your own feelings about the change","Plan to tell physicians before they hear it informally"],
+   openers:{
+     D:"I want to tell you about a decision directly. We're moving to the new weekend coverage model in 60 days. It's not up for debate, but how we implement it is, and I want your input on that.",
+     I:"I know this news is going to land hard, and I wanted you to hear it from me. We're adopting the new weekend coverage model in 60 days. I'd like your help making it work as well as possible for our team.",
+     S:"I want to share a change that will affect our schedules, and I want to give you time to absorb it. We're moving to a new weekend coverage model in 60 days. I'll walk through what changes, what stays the same, and how we'll support each other.",
+     C:"I'd like to walk you through a policy decision, the reasoning behind it, and the timeline. We're adopting the standardized weekend coverage model in 60 days. I have the analysis leadership used, and I'll be clear about what's fixed and what we can still shape."},
+   turns:[
+     {they:"So our input doesn't matter? This was decided without us.", model:"You're right that we weren't consulted on the decision, and I understand the frustration. I've shared that feedback with leadership. Where your input matters now is in how we implement it, and I mean that."},
+     {they:"This is going to push people to leave.", model:"That's a real concern, and I don't want to lose anyone. Tell me specifically what would make the biggest difference for you, and I'll take hardship requests and retention concerns to leadership."},
+     {they:"What exactly can we still change?", model:"Shift assignments, swap rules, and how we handle hardship exceptions are open. I'd like to form a small working group to design those by next month. Would you be willing to be part of it?"}],
+   reflect:["Were you honest about what is fixed without blaming leadership?","Did you acknowledge the impact before explaining the rationale?","Where did you feel pressure to overpromise?","How will you show the team that their implementation input made a difference?"]}
+];
+</script>
+<script>
+/* ===================== APP LOGIC ===================== */
+"use strict";
+(function(){
+const CFG = window.SITE_CONFIG;
+const PANELS = ["home","disc","leadership","profile","communicate","conversations","dashboard"];
+const $ = (s,r=document)=>r.querySelector(s);
+const $$ = (s,r=document)=>Array.from(r.querySelectorAll(s));
+const esc = s => String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+const uid = ()=> "d"+Math.random().toString(36).slice(2,9)+Date.now().toString(36).slice(-4);
+const fmtDate = iso => { if(!iso) return ""; const d=new Date(iso); return isNaN(d)?"":d.toLocaleDateString(undefined,{year:"numeric",month:"short",day:"numeric"}); };
+const list = arr => "<ul>"+arr.map(x=>"<li>"+esc(x)+"</li>").join("")+"</ul>";
+const slug = s => String(s||"director").toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"") || "director";
+
+/* ---------- State ---------- */
+function newDirector(name){ return {id:uid(), name:name, disc:null, lead:null, practice:{}, notes:"", updated:null}; }
+function defaultState(){
+  const ds = Array.from({length:CFG.ROSTER_SIZE},(_,i)=>newDirector("Director "+(i+1)));
+  return {v:1, orgOverride:"", directors:ds, activeId:ds[0].id, drafts:{}};
+}
+let storageOK = true;
+function load(){
+  try{
+    const raw = localStorage.getItem(CFG.STORAGE_KEY);
+    if(!raw) return defaultState();
+    const s = JSON.parse(raw);
+    if(!s || !Array.isArray(s.directors) || !s.directors.length) return defaultState();
+    s.drafts = s.drafts || {};
+    s.directors.forEach(d=>{ d.practice=d.practice||{}; d.notes=d.notes||""; });
+    if(!s.directors.some(d=>d.id===s.activeId)) s.activeId = s.directors[0].id;
+    return s;
+  }catch(e){ storageOK=false; return defaultState(); }
+}
+let state = load();
+function save(){
+  try{ localStorage.setItem(CFG.STORAGE_KEY, JSON.stringify(state)); storageOK=true; }
+  catch(e){ if(storageOK){ toast("Could not save to this browser's storage. Use Export to keep a copy."); } storageOK=false; }
+}
+const active = ()=> state.directors.find(d=>d.id===state.activeId) || state.directors[0];
+const byId = id => state.directors.find(d=>d.id===id);
+const orgName = ()=> state.orgOverride || CFG.ORG_NAME;
+const ui = {panel:"home", retake:{disc:false,lead:false}, scen:SCENARIOS[0].id, scenType:"D", shown:{}};
+
+/* ---------- Toast ---------- */
+let toastTimer;
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.hidden=false; clearTimeout(toastTimer); toastTimer=setTimeout(()=>{t.hidden=true;},3200); }
+
+/* ---------- Header and active bar ---------- */
+function renderChrome(){
+  $("#orgName").textContent = orgName();
+  $("#siteTitle").textContent = CFG.SITE_TITLE;
+  document.title = CFG.SITE_TITLE + " | " + orgName();
+  const sel = $("#activeSelect");
+  sel.innerHTML = state.directors.map(d=>`<option value="${esc(d.id)}"${d.id===state.activeId?" selected":""}>${esc(d.name)}</option>`).join("");
+  const p = active();
+  $("#activeStatus").innerHTML =
+    `<span class="pill ${p.disc?"ok":"todo"}">DISC: ${p.disc?esc(p.disc.primary+"/"+p.disc.secondary):"not yet"}</span>`+
+    `<span class="pill ${p.lead?"ok":"todo"}">Leadership: ${p.lead?esc(p.lead.top[0]):"not yet"}</span>`;
+}
+
+/* ---------- Tabs and routing ---------- */
+function show(id, opts={}){
+  if(!PANELS.includes(id)) id="home";
+  ui.panel=id;
+  PANELS.forEach(pid=>{
+    const panel=$("#"+pid), tab=$("#tab-"+pid), on = pid===id;
+    panel.hidden=!on; tab.setAttribute("aria-selected", on?"true":"false"); tab.tabIndex = on?0:-1;
+  });
+  render(id);
+  if(location.hash.slice(1)!==id) history.replaceState(null,"","#"+id);
+  if(opts.focusTab) $("#tab-"+id).focus();
+  if(opts.scroll!==false) window.scrollTo({top:0});
+}
+function render(id){
+  renderChrome();
+  ({home:renderHome, disc:()=>renderQuiz("disc"), leadership:()=>renderQuiz("lead"), profile:renderProfile, communicate:renderComm, conversations:renderConv, dashboard:renderDash})[id]();
+}
+$("#tabs").addEventListener("click",e=>{ const b=e.target.closest("[role=tab]"); if(b) show(b.getAttribute("aria-controls")); });
+$("#tabs").addEventListener("keydown",e=>{
+  const i = PANELS.indexOf(ui.panel); let n=null;
+  if(e.key==="ArrowRight") n=(i+1)%PANELS.length;
+  else if(e.key==="ArrowLeft") n=(i-1+PANELS.length)%PANELS.length;
+  else if(e.key==="Home") n=0; else if(e.key==="End") n=PANELS.length-1;
+  if(n!==null){ e.preventDefault(); show(PANELS[n],{focusTab:true}); }
+});
+window.addEventListener("hashchange",()=>{ const h=location.hash.slice(1); if(h!==ui.panel && PANELS.includes(h)) show(h); });
+$("#activeSelect").addEventListener("change",e=>{ state.activeId=e.target.value; ui.retake={disc:false,lead:false}; save(); render(ui.panel); toast("Now working as "+active().name); });
+
+/* ---------- Scoring ---------- */
+function scoreDisc(ans){
+  const raw={D:0,I:0,S:0,C:0};
+  DISC_ITEMS.forEach((it,i)=>{ raw[it.t]+= +ans[i]; });
+  const pct={}; DISC_ORDER.forEach(t=>pct[t]=Math.round((raw[t]-6)/24*100));
+  const ranked=[...DISC_ORDER].sort((a,b)=>raw[b]-raw[a]);
+  return {raw,pct,primary:ranked[0],secondary:ranked[1],ranked,close:(raw[ranked[0]]-raw[ranked[1]])<=2,date:new Date().toISOString(),answers:DISC_ITEMS.map((_,i)=>+ans[i])};
+}
+function scoreLead(ans){
+  const raw={}; LEAD_ORDER.forEach(s=>raw[s]=0);
+  LEAD_ITEMS.forEach((it,i)=>{ raw[it.t]+= +ans[i]; });
+  const pct={}; LEAD_ORDER.forEach(s=>pct[s]=Math.round((raw[s]-3)/12*100));
+  const ranked=[...LEAD_ORDER].sort((a,b)=>raw[b]-raw[a]);
+  const top=[ranked[0],ranked[1]]; if(raw[ranked[2]]===raw[ranked[1]]) top.push(ranked[2]);
+  return {raw,pct,ranked,top,low:ranked.slice(-2).reverse(),date:new Date().toISOString(),answers:LEAD_ITEMS.map((_,i)=>+ans[i])};
+}
+
+/* ---------- Charts ---------- */
+function discChart(r, title){
+  const rows = DISC_ORDER.map(t=>{
+    const top = t===r.primary || t===r.secondary;
+    return `<div class="row${top?" top":""}" title="${DISC[t].name}: ${r.pct[t]}% (raw ${r.raw[t]} of 30)">
+      <div class="lab"><span class="typechip bg-${t}" style="width:24px;height:24px;font-size:.8rem;border-radius:6px" aria-hidden="true">${t}</span>${DISC[t].name}</div>
+      <div class="track" aria-hidden="true"><div class="bar bg-${t}" style="width:${Math.max(2,r.pct[t])}%"></div></div>
+      <div class="val">${r.pct[t]}%</div></div>`;
+  }).join("");
+  return `<figure class="chart" style="margin:0"><figcaption class="charttitle">${esc(title||"DISC style intensity (0 to 100)")}</figcaption>${rows}</figure>`;
+}
+function leadChart(r, title){
+  const rows = LEAD_ORDER.map(s=>{
+    const top = r.top.includes(s);
+    return `<div class="row${top?" top":""}" title="${s}: ${r.pct[s]}% (raw ${r.raw[s]} of 15)">
+      <div class="lab">${s}${top?' <span class="pill ok" style="padding:0 7px">Top</span>':""}</div>
+      <div class="track" aria-hidden="true"><div class="bar" style="width:${Math.max(2,r.pct[s])}%;background:${top?"var(--brand)":"#7fb3ba"}"></div></div>
+      <div class="val">${r.pct[s]}%</div></div>`;
+  }).join("");
+  return `<figure class="chart" style="margin:0"><figcaption class="charttitle">${esc(title||"How often you use each style (0 to 100)")}</figcaption>${rows}</figure>`;
+}
+function countChart(items){ /* items: [{label, n, color, chip}] */
+  const max = Math.max(1,...items.map(i=>i.n));
+  return `<div class="chart">`+items.map(i=>`<div class="row" title="${esc(i.label)}: ${i.n}">
+    <div class="lab">${i.chip?`<span class="typechip bg-${i.chip}" style="width:22px;height:22px;font-size:.75rem;border-radius:6px" aria-hidden="true">${i.chip}</span>`:""}${esc(i.label)}</div>
+    <div class="track" aria-hidden="true"><div class="bar" style="width:${i.n?Math.max(3,i.n/max*100):0}%;background:${i.color}"></div></div>
+    <div class="val">${i.n}</div></div>`).join("")+`</div>`;
+}
+
+/* ---------- Home ---------- */
+function renderHome(){
+  const p=active();
+  const next = !p.disc ? {go:"disc",t:"Start the DISC-style assessment"} : !p.lead ? {go:"leadership",t:"Take the leadership style assessment"} : {go:"profile",t:"View your combined profile"};
+  $("#home").innerHTML = `
+  <div class="hero">
+    <div>
+      <div class="kicker">${esc(orgName())}</div>
+      <h1>${esc(CFG.SITE_TITLE)}</h1>
+      <p class="lead">A private, practical toolkit for physician leaders. Discover your communication style and leadership habits, learn to flex to the people you lead, and rehearse the conversations that matter most.</p>
+      <div class="btnrow"><button class="btn" data-go="${next.go}">${next.t}</button><button class="btn secondary" data-go="conversations">Practice a conversation</button></div>
+    </div>
+    <div class="card" style="box-shadow:none">
+      <h2 style="font-size:1.1rem">Your progress</h2>
+      <label for="homeName" class="small" style="font-weight:600">Your name (as saved in this browser)</label>
+      <div class="btnrow" style="margin:6px 0 12px"><input type="text" id="homeName" value="${esc(p.name)}" style="flex:1;min-width:160px" autocomplete="name"><button class="btn secondary sm" data-action="rename-active">Save name</button></div>
+      <ul style="list-style:none;padding:0;margin:0" class="small">
+        <li>${p.disc?"&#10003;":"&#9675;"} DISC-style assessment ${p.disc?`<span class="muted">(${esc(DISC[p.disc.primary].name)}, ${fmtDate(p.disc.date)})</span>`:""}</li>
+        <li>${p.lead?"&#10003;":"&#9675;"} Leadership style assessment ${p.lead?`<span class="muted">(${esc(p.lead.top[0])}, ${fmtDate(p.lead.date)})</span>`:""}</li>
+        <li>${p.disc&&p.lead?"&#10003;":"&#9675;"} Combined profile and coaching tips</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 style="margin-top:28px">How it works</h2>
+  <div class="grid g4">
+    <div class="card"><div class="kicker">Step 1 &middot; 5 min</div><h3>DISC-style assessment</h3><p class="small muted">24 statements reveal your natural communication style across Dominance, Influence, Steadiness, and Conscientiousness.</p><button class="btn ghost" data-go="disc">Begin &rarr;</button></div>
+    <div class="card"><div class="kicker">Step 2 &middot; 4 min</div><h3>Leadership styles</h3><p class="small muted">18 statements map your habits to six leadership styles, with clinical examples of when each one helps or hurts.</p><button class="btn ghost" data-go="leadership">Begin &rarr;</button></div>
+    <div class="card"><div class="kicker">Step 3</div><h3>Your profile</h3><p class="small muted">See both results together, with personalized tips for using your strengths and adapting to others.</p><button class="btn ghost" data-go="profile">Open &rarr;</button></div>
+    <div class="card"><div class="kicker">Step 4</div><h3>Practice</h3><p class="small muted">Use the communication guide and six realistic medical director scenarios to prepare for hard conversations.</p><button class="btn ghost" data-go="conversations">Practice &rarr;</button></div>
+  </div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>For directors</h3><ol class="small"><li>Choose your name in <strong>Working as</strong> above, or type it in the progress box.</li><li>Complete both assessments.</li><li>On <strong>My Profile</strong>, click <strong>Export my results</strong> and send the file to your coach.</li></ol></div>
+    <div class="card"><h3>For the coach</h3><p class="small">The <strong>Coach Dashboard</strong> holds a roster of ${state.directors.length} directors. Import the files directors send you to see everyone's results, team patterns, and a CSV export. Back up regularly with Export.</p><button class="btn secondary sm" data-go="dashboard">Open dashboard</button></div>
+  </div>
+  <p class="note" style="margin-top:16px"><strong>Your data stays here.</strong> No server, no login, no tracking. Results live in this browser's local storage until you export or clear them.${storageOK?"":" <strong>Storage appears to be unavailable in this browser, so results will be lost when you close the page. Export to keep them.</strong>"}</p>`;
+}
+
+/* ---------- Quizzes ---------- */
+function quizCfg(key){
+  return key==="disc"
+    ? {panel:"disc", items:DISC_ITEMS, scale:LIKERT_DISC, title:"DISC-style self-assessment", score:scoreDisc,
+       intro:`<p class="lead">24 statements, about 5 minutes. Rate how much each statement sounds like you <em>at work</em>, as you actually are rather than how you think you should be. There are no right answers; every style brings strengths.</p>
+       <p class="note warn small"><strong>Informal self-assessment.</strong> This is an original reflection tool modeled on the four public-domain DISC dimensions (Dominance, Influence, Steadiness, Conscientiousness). It is not the licensed Everything DiSC&reg; or any other commercial instrument, it has not been psychometrically validated, and it should be used only for self-reflection and coaching, never for hiring, evaluation, or credentialing.</p>`,
+       prompt:"How much does this sound like you?"}
+    : {panel:"leadership", items:LEAD_ITEMS, scale:LIKERT_LEAD, title:"Leadership style assessment", score:scoreLead,
+       intro:`<p class="lead">18 statements, about 4 minutes. Rate how often you <em>actually</em> do each one, thinking about the last three months. The six styles come from Daniel Goleman's widely cited research on leadership: Visionary, Coaching, Affiliative, Democratic, Pacesetting, and Commanding.</p>
+       <p class="note small">The most effective leaders do not have one style. They have a repertoire and switch deliberately based on the situation. Use your results to see your defaults and your growth edges.</p>`,
+       prompt:"How often do you do this?"};
+}
+function getDraft(key){ const d = state.drafts[state.activeId] = state.drafts[state.activeId]||{}; return d[key] = d[key]||{}; }
+function renderQuiz(key){
+  const cfg=quizCfg(key), p=active(), el=$("#"+cfg.panel);
+  if(p[key] && !ui.retake[key]){ el.innerHTML = `<h1>${cfg.title}</h1>` + (key==="disc"?discResults(p):leadResults(p)); return; }
+  const draft=getDraft(key), n=cfg.items.length, done=Object.keys(draft).length;
+  el.innerHTML = `<h1>${cfg.title}</h1>${cfg.intro}
+  <div class="quizhead"><div><strong>Answering as ${esc(p.name)}</strong><div class="scalekey">${cfg.prompt} 1 = ${cfg.scale[0].l}, 5 = ${cfg.scale[4].l}</div></div>
+    <div style="flex:1;max-width:360px"><div class="small muted" id="${key}-count" aria-live="polite">${done} of ${n} answered</div><div class="progress" role="progressbar" aria-label="Progress" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${done}" id="${key}-prog"><span style="width:${done/n*100}%"></span></div></div></div>
+  <form id="${key}-form" novalidate>
+    ${cfg.items.map((it,i)=>`<fieldset class="q${draft[i]?" answered":""}" id="${key}-f${i}">
+      <legend><span class="num">${i+1}.</span>${esc(it.q)}</legend>
+      <div class="likert">${cfg.scale.map(s=>`<label><input type="radio" name="${key}-q${i}" value="${s.v}" data-quiz="${key}" data-i="${i}"${+draft[i]===s.v?" checked":""}><b>${s.v}</b><span class="lbl">${s.l}</span><span class="sr-only"> ${s.l}</span></label>`).join("")}</div>
+    </fieldset>`).join("")}
+    <div class="submitbar"><span class="small muted">Your answers save automatically as you go.</span>
+      <div class="btnrow">${p[key]?`<button type="button" class="btn secondary" data-action="cancel-retake" data-key="${key}">Cancel retake</button>`:""}<button type="submit" class="btn">See my results</button></div></div>
+  </form>`;
+  // remove duplicated visible labels for screen readers: the .lbl text is visual; sr-only covers narrow screens
+  $$(".likert .lbl",el).forEach(s=>s.setAttribute("aria-hidden","true"));
+  $("#"+key+"-form").addEventListener("submit",e=>{ e.preventDefault(); submitQuiz(key); });
+}
+function updateProgress(key){
+  const cfg=quizCfg(key), n=cfg.items.length, done=Object.keys(getDraft(key)).length;
+  const c=$("#"+key+"-count"), pg=$("#"+key+"-prog");
+  if(c) c.textContent=done+" of "+n+" answered";
+  if(pg){ pg.setAttribute("aria-valuenow",done); pg.firstElementChild.style.width=(done/n*100)+"%"; }
+}
+function submitQuiz(key){
+  const cfg=quizCfg(key), draft=getDraft(key), missing=[];
+  cfg.items.forEach((_,i)=>{ if(!draft[i]) missing.push(i); });
+  $$("fieldset.q").forEach(f=>f.classList.remove("missing"));
+  if(missing.length){
+    missing.forEach(i=>$("#"+key+"-f"+i).classList.add("missing"));
+    const first=$("#"+key+"-f"+missing[0]); first.scrollIntoView({behavior:"smooth",block:"center"});
+    const r=first.querySelector("input"); if(r) r.focus({preventScroll:true});
+    toast(missing.length+" statement"+(missing.length>1?"s":"")+" still need an answer.");
+    return;
+  }
+  const p=active(); p[key]=cfg.score(draft); p.updated=new Date().toISOString();
+  delete state.drafts[p.id][key]; ui.retake[key]=false; save(); render(cfg.panel); window.scrollTo({top:0});
+  toast("Results saved for "+p.name);
+}
+
+const BLEND = {D:"a decisive, results-focused edge", I:"warmth and persuasive energy", S:"patience and a steadying presence", C:"precision and a preference for evidence"};
+function discResults(p){
+  const r=p.disc, P=DISC[r.primary], S=DISC[r.secondary];
+  return `<div class="card">
+    <div class="resultbanner">
+      <div class="bigtype"><span class="typechip bg-${r.primary}" aria-hidden="true">${r.primary}</span><div><div class="kicker" style="margin:0">Primary style</div><strong style="font-size:1.25rem">${P.name}</strong><div class="muted small">${P.short}</div></div></div>
+      <div class="bigtype"><span class="typechip bg-${r.secondary}" aria-hidden="true" style="opacity:.85">${r.secondary}</span><div><div class="kicker" style="margin:0">Secondary style</div><strong style="font-size:1.1rem">${S.name}</strong><div class="muted small">${S.short}</div></div></div>
+      <div class="muted small" style="margin-left:auto">${esc(p.name)} &middot; ${fmtDate(r.date)}</div>
+    </div>
+    <hr class="sep">
+    <div class="twocol"><div>${discChart(r)}<p class="small muted" style="margin-top:8px">Everyone uses all four styles. Higher bars show the patterns you rely on most naturally.</p></div>
+    <div><p>${P.summary}</p><p>Your secondary <strong>${S.name}</strong> style adds ${BLEND[r.secondary]}.${r.close?` Your top two scores are close, so you may move between them comfortably depending on the situation.`:""}</p><p class="small"><strong>What energizes you:</strong> ${P.motivators}</p></div></div>
+  </div>
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h3>Natural strengths</h3>${list(P.strengths)}</div>
+    <div class="card"><h3>Watch for</h3>${list(P.watchouts)}</div>
+  </div>
+  <div class="btnrow noprint" style="margin-top:16px">
+    ${p.lead?`<button class="btn" data-go="profile">View combined profile</button>`:`<button class="btn" data-go="leadership">Next: leadership styles</button>`}
+    <button class="btn secondary" data-go="communicate">Communicating with each type</button>
+    <button class="btn ghost" data-action="retake" data-key="disc">Retake assessment</button>
+  </div>`;
+}
+function styleCard(s, r, open){
+  const L=LEAD[s];
+  return `<details${open?" open":""}><summary><span>${s} <span class="muted" style="font-weight:400">&ldquo;${L.phrase}&rdquo;</span></span>${r?`<span class="pill">${r.pct[s]}%</span>`:""}</summary><div class="dbody">
+    <p>${L.desc}</p>
+    <div class="grid g2"><div><h4>Strengths</h4>${list(L.strengths)}</div><div><h4>Blind spots</h4>${list(L.blind)}</div></div>
+    <dl class="kv"><dt>When it works in a clinical setting</dt><dd>${L.works}</dd><dt>When it backfires</dt><dd>${L.backfires}</dd></dl>
+  </div></details>`;
+}
+function leadResults(p){
+  const r=p.lead;
+  return `<div class="card">
+    <div class="resultbanner"><div><div class="kicker" style="margin:0">Your go-to styles</div><strong style="font-size:1.25rem">${r.top.join(", ")}</strong></div><div class="muted small" style="margin-left:auto">${esc(p.name)} &middot; ${fmtDate(r.date)}</div></div>
+    <hr class="sep">
+    <div class="twocol"><div>${leadChart(r)}</div>
+    <div><p><strong>${r.top[0]}</strong> is your strongest habit: ${LEAD[r.top[0]].desc.charAt(0).toLowerCase()+LEAD[r.top[0]].desc.slice(1)}</p>
+    <p><strong>Growth edge:</strong> ${r.low.join(" and ")} ${r.low.length>1?"are":"is"} your least-used ${r.low.length>1?"styles":"style"}. You do not need to use every style equally, but knowing when to reach for each one widens your range.</p></div></div>
+  </div>
+  <h2 style="margin-top:24px">Your top styles</h2>
+  ${r.top.map(s=>styleCard(s,r,true)).join("")}
+  <h2 style="margin-top:24px">All six styles</h2>
+  ${r.ranked.filter(s=>!r.top.includes(s)).map(s=>styleCard(s,r,false)).join("")}
+  <div class="btnrow noprint" style="margin-top:16px">
+    ${p.disc?`<button class="btn" data-go="profile">View combined profile</button>`:`<button class="btn" data-go="disc">Next: DISC-style assessment</button>`}
+    <button class="btn ghost" data-action="retake" data-key="lead">Retake assessment</button>
+  </div>`;
+}
+
+/* ---------- Profile ---------- */
+function coachingQuestions(p){
+  const q=[];
+  if(p.disc){ const P=DISC[p.disc.primary];
+    q.push(`When has your ${P.name} style helped you most as a medical director? When has it gotten in your way?`);
+    q.push(`Which physician on your team is most different from you in style? What is one thing you could adjust in your next conversation with them?`); }
+  if(p.lead){
+    q.push(`Think of a recent situation where ${p.lead.top[0]} was not the right style. What would ${p.lead.low[0]} have looked like?`);
+    q.push(`What is one situation in the next month where you will deliberately practice ${p.lead.low[0]} leadership?`); }
+  q.push("Which difficult conversation have you been postponing, and what is it costing you, your team, or patients?");
+  return q;
+}
+function renderProfile(){
+  const p=active(), el=$("#profile");
+  if(!p.disc && !p.lead){
+    el.innerHTML=`<h1>Profile: ${esc(p.name)}</h1><div class="card empty"><p>No results yet for <strong>${esc(p.name)}</strong>.</p><p class="small">Complete both assessments to unlock your combined profile and personalized coaching tips.</p><div class="btnrow" style="justify-content:center"><button class="btn" data-go="disc">Start DISC-style assessment</button><button class="btn secondary" data-go="leadership">Start leadership assessment</button></div></div>`;
+    return;
+  }
+  const d=p.disc, l=p.lead;
+  let insight="";
+  if(d && l){
+    const aff=DISC_LEAD_AFFINITY[d.primary], top=l.top[0];
+    insight = aff.includes(top)
+      ? `Your top leadership style, <strong>${top}</strong>, comes naturally to a ${DISC[d.primary].name} temperament, so it likely feels authentic and easy. The risk is overuse: reaching for ${top} out of habit when the situation calls for something else. Your least-used style, <strong>${l.low[0]}</strong>, is a deliberate stretch worth practicing.`
+      : `Your top leadership style, <strong>${top}</strong>, is not the most typical match for a ${DISC[d.primary].name} temperament, which suggests you have built range through experience and intention. Watch for it fading under stress, when people tend to fall back on their natural defaults (for ${DISC[d.primary].name}, often ${aff[0]} or ${aff[1]}).`;
+  }
+  el.innerHTML = `
+  <div class="btnrow" style="justify-content:space-between;align-items:flex-start"><div><div class="kicker">Combined profile</div><h1>${esc(p.name)}</h1></div>
+    <div class="btnrow noprint"><button class="btn secondary sm" data-action="print">Print or save as PDF</button><button class="btn sm" data-action="export-me">Export my results</button></div></div>
+  ${d&&l?`<p class="lead">You lead with a <strong>${DISC[d.primary].name}</strong> communication style (${DISC[d.primary].short.toLowerCase()}) with <strong>${DISC[d.secondary].name}</strong> secondary, and your go-to leadership styles are <strong>${l.top.join(" and ")}</strong>.</p>`:""}
+  ${!d?`<p class="note warn noprint">Complete the <a href="#disc" data-go="disc">DISC-style assessment</a> to add communication tips.</p>`:""}
+  ${!l?`<p class="note warn noprint">Complete the <a href="#leadership" data-go="leadership">leadership style assessment</a> to add leadership tips.</p>`:""}
+  <div class="grid g2">
+    ${d?`<div class="card">${discChart(d,"DISC-style results")}<p class="small muted" style="margin:8px 0 0">Primary ${d.primary} (${DISC[d.primary].name}), secondary ${d.secondary} (${DISC[d.secondary].name}) &middot; ${fmtDate(d.date)}</p></div>`:""}
+    ${l?`<div class="card">${leadChart(l,"Leadership style results")}<p class="small muted" style="margin:8px 0 0">Top: ${l.top.join(", ")} &middot; ${fmtDate(l.date)}</p></div>`:""}
+  </div>
+  ${insight?`<div class="card"><h2>How your two results fit together</h2><p>${insight}</p></div>`:""}
+
+  ${d?`<div class="card"><h2>Using your natural style</h2>${list(DISC[d.primary].natural)}
+    <div class="grid g2"><div><h4>Strengths to lean on</h4>${list(DISC[d.primary].strengths)}</div><div><h4>Under pressure, watch for</h4>${list(DISC[d.primary].watchouts)}</div></div></div>
+
+  <h2 style="margin-top:28px">Adapting to each DISC type</h2>
+  <p class="muted">As a ${DISC[d.primary].name} communicator, here is how to flex your approach for each style.</p>
+  <div class="grid g4">${DISC_ORDER.map(t=>`<div class="card bd-${t}"><div class="cardhead"><span class="typechip bg-${t}" aria-hidden="true">${t}</span><div><h3>With ${DISC[t].name}</h3><div class="small muted">${DISC[t].short}</div></div></div><p class="small">${ADAPT[d.primary][t]}</p><h4 class="small" style="margin-bottom:2px">Try saying</h4><ul class="small">${DISC[t].comm.use.slice(0,2).map(x=>"<li>"+esc(x)+"</li>").join("")}</ul></div>`).join("")}</div>`:""}
+
+  ${l?`<h2 style="margin-top:28px">Adapting your leadership style</h2>
+  <p class="muted">Match the style to the situation. Your scores are shown for each.</p>
+  <div class="grid g3">${LEAD_ORDER.map(s=>{ const isTop=l.top.includes(s), isLow=l.low.includes(s), L=LEAD[s];
+    return `<div class="card"><div class="btnrow" style="justify-content:space-between"><h3 style="margin:0">${s}</h3><span class="pill ${isTop?"ok":isLow?"todo":""}">${isTop?"Go-to":isLow?"Stretch":"Moderate"} &middot; ${l.pct[s]}%</span></div>
+      ${isTop?`<p class="small"><strong>Keep using it when:</strong> ${L.works}</p><p class="small"><strong>Watch for:</strong> ${L.blind[0]}. ${L.backfires}</p>`
+             :`<p class="small"><strong>Reach for it when:</strong> ${L.works}</p><p class="small"><strong>How to build it:</strong> ${L.build[0]}</p>`}</div>`; }).join("")}</div>`:""}
+
+  <div class="card" style="margin-top:28px"><h2>Questions for your next coaching session</h2><ol>${coachingQuestions(p).map(q=>"<li>"+esc(q)+"</li>").join("")}</ol>
+    <label for="profNotes" style="font-weight:600;display:block;margin-top:10px">My reflections and goals</label>
+    <textarea id="profNotes" data-notes="1" placeholder="Write a goal or reflection. Saved automatically in this browser.">${esc(p.notes)}</textarea><div class="savedmsg" id="notesSaved" aria-live="polite"></div></div>`;
+}
+
+/* ---------- Communicating by type ---------- */
+function renderComm(){
+  const p=active(), mine=p.disc&&p.disc.primary;
+  $("#communicate").innerHTML = `<h1>Communicating with each DISC type</h1>
+  <p class="lead">Physicians differ in what they need to hear a hard message. Spot the likely style, then adjust your pace, your opening, and your words. Style explains preferences; it never excuses behavior or replaces clinical judgment.</p>
+  <div class="card"><h2 style="font-size:1.15rem">Quick spotting guide</h2>
+    <div class="grid g4">
+      <div><strong><span class="dot bg-D"></span> D: fast paced, task focused</strong><p class="small muted">Brief, direct, decisive. Interrupts with "So what do you need?"</p></div>
+      <div><strong><span class="dot bg-I"></span> I: fast paced, people focused</strong><p class="small muted">Animated, talkative, tells stories. Cares about relationships and recognition.</p></div>
+      <div><strong><span class="dot bg-S"></span> S: steady paced, people focused</strong><p class="small muted">Calm, patient, agreeable. Asks how others will be affected.</p></div>
+      <div><strong><span class="dot bg-C"></span> C: steady paced, task focused</strong><p class="small muted">Precise, reserved, questioning. Asks for data and the methodology.</p></div>
+    </div>
+    ${mine?`<p class="note small" style="margin:8px 0 0">Tips below include notes for you as a <strong>${DISC[mine].name}</strong> communicator.</p>`:`<p class="small muted" style="margin:8px 0 0">Complete the DISC-style assessment to see personalized tips on each card.</p>`}
+  </div>
+  <div class="grid g2" style="margin-top:16px">${DISC_ORDER.map(t=>{ const T=DISC[t], c=T.comm; return `
+    <article class="card bd-${t}" aria-labelledby="comm-${t}">
+      <div class="cardhead"><span class="typechip bg-${t}" aria-hidden="true">${t}</span><div><h3 id="comm-${t}">${T.name}</h3><div class="small muted">${T.short}</div></div></div>
+      <h4>How they think</h4><p class="small">${c.thinks}</p>
+      <h4>What they need in a hard conversation</h4>${list(c.needs)}
+      <div class="words"><div class="use"><h4>Words to use</h4>${list(c.use)}</div><div class="avoid"><h4>Words to avoid</h4>${list(c.avoid)}</div></div>
+      <h4 style="margin-top:14px">Physician examples</h4>${c.examples.map(x=>`<blockquote class="small">${esc(x)}</blockquote>`).join("")}
+      ${mine?`<p class="note small" style="margin-top:10px"><strong>For you (${mine}):</strong> ${ADAPT[mine][t]}</p>`:""}
+    </article>`; }).join("")}</div>`;
+}
+
+/* ---------- Difficult conversations ---------- */
+function prac(sid){ const p=active(); p.practice[sid]=p.practice[sid]||{r:[],q:[]}; return p.practice[sid]; }
+function renderConv(){
+  const sc=SCENARIOS.find(s=>s.id===ui.scen)||SCENARIOS[0], t=ui.scenType, pr=(active().practice[sc.id])||{r:[],q:[]};
+  $("#conversations").innerHTML = `<h1>Difficult conversations</h1>
+  <p class="lead">A simple, repeatable framework plus six realistic medical director scenarios. Choose a scenario, pick the other physician's likely style, and rehearse.</p>
+  <h2 style="font-size:1.2rem">The framework</h2>
+  <ol class="steps" style="list-style:none;padding:0">${FRAMEWORK.map((f,i)=>`<li class="step"><span class="sn" aria-hidden="true">${i+1}</span><h3>${f.n}</h3>${list(f.items)}</li>`).join("")}</ol>
+
+  <h2 style="font-size:1.2rem;margin-top:28px" id="scenHead">Choose a scenario</h2>
+  <div class="scenlist" role="group" aria-labelledby="scenHead">${SCENARIOS.map(s=>`<button data-action="scen" data-id="${s.id}" aria-pressed="${s.id===sc.id}">${s.title}<span>${s.tag}</span></button>`).join("")}</div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="kicker">${sc.tag}</div><h2>${sc.title}</h2>
+    <p>${esc(sc.context)}</p>
+    <p class="note small"><strong>Your goal:</strong> ${esc(sc.goal)}</p>
+    <div class="grid g2" style="margin-top:12px">
+      <div><h3>1. Prepare</h3>${list(sc.prep)}</div>
+      <div><h3>2. Open: tailor it to their style</h3>
+        <div class="seg" role="group" aria-label="Other person's DISC style">${DISC_ORDER.map(x=>`<button data-action="scen-type" data-t="${x}" aria-pressed="${x===t}"><span class="dot bg-${x}" aria-hidden="true"></span>${x} ${DISC[x].name}</button>`).join("")}</div>
+        <div class="opener" aria-live="polite">&ldquo;${esc(sc.openers[t])}&rdquo;</div>
+        <p class="small muted">Why it fits a ${DISC[t].name} style: ${esc(DISC[t].comm.needs[0])}. ${esc(DISC[t].comm.needs[2])}.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>3 and 4. Listen and problem solve: role-play</h3>
+    <p class="small muted">Read each response, type what you would say (or say it aloud with a colleague), then compare with a model response. Your practice saves to <strong>${esc(active().name)}</strong> in this browser.</p>
+    ${sc.turns.map((tu,i)=>`<div class="turn"><div class="they">&ldquo;${esc(tu.they)}&rdquo;</div>
+      <label class="sr-only" for="pr-${sc.id}-r${i}">Your response to: ${esc(tu.they)}</label>
+      <textarea id="pr-${sc.id}-r${i}" data-prac="${sc.id}|r|${i}" placeholder="What would you say?">${esc(pr.r[i]||"")}</textarea>
+      <div class="btnrow" style="margin-top:6px"><button class="btn ghost sm" data-action="toggle-model" data-k="${sc.id}-${i}" aria-expanded="${!!ui.shown[sc.id+"-"+i]}">${ui.shown[sc.id+"-"+i]?"Hide":"Show"} a model response</button></div>
+      ${ui.shown[sc.id+"-"+i]?`<div class="model"><strong>One effective response:</strong> ${esc(tu.model)}</div>`:""}
+    </div>`).join("")}
+  </div>
+
+  <div class="card">
+    <h3>5. Close, follow up, and reflect</h3>
+    <p class="small">Summarize the agreements out loud, confirm them in writing within 24 hours, and set a check-in date. Then reflect:</p>
+    ${sc.reflect.map((q,i)=>`<label for="pr-${sc.id}-q${i}" style="display:block;font-weight:600;margin-top:12px">${esc(q)}</label><textarea id="pr-${sc.id}-q${i}" data-prac="${sc.id}|q|${i}" style="min-height:64px">${esc(pr.q[i]||"")}</textarea>`).join("")}
+    <div class="savedmsg" id="pracSaved" aria-live="polite"></div>
+  </div>`;
+}
+
+/* ---------- Dashboard ---------- */
+function renderDash(){
+  const ds=state.directors, nD=ds.filter(d=>d.disc).length, nL=ds.filter(d=>d.lead).length, nB=ds.filter(d=>d.disc&&d.lead).length;
+  const discCounts=DISC_ORDER.map(t=>({label:DISC[t].name, chip:t, n:ds.filter(d=>d.disc&&d.disc.primary===t).length, color:`var(--${t.toLowerCase()})`}));
+  const leadCounts=LEAD_ORDER.map(s=>({label:s, n:ds.filter(d=>d.lead&&d.lead.top.includes(s)).length, color:"var(--brand-2)"}));
+  const insights=[];
+  if(nD>=3){ discCounts.forEach(c=>{ if(c.n===0) insights.push(`No director leads with ${c.label}. Watch for blind spots in the areas that style covers: ${{Dominance:"speed and decisive calls",Influence:"enthusiasm and buy-in",Steadiness:"stability and follow-through",Conscientiousness:"rigor and quality checks"}[c.label]}.`); });
+    const mx=discCounts.reduce((a,b)=>b.n>a.n?b:a); if(mx.n/nD>=.5) insights.push(`Half or more of the team leads with ${mx.label}. Group discussions may default to that style's pace and priorities.`); }
+  if(nL>=3){ const pace=leadCounts.find(c=>c.label==="Pacesetting").n, comm=leadCounts.find(c=>c.label==="Commanding").n;
+    if((pace+comm)/nL>=.6) insights.push("Pacesetting and Commanding are common go-to styles on this team. Overuse is a burnout risk; consider group work on Coaching and Affiliative leadership.");
+    const coach=leadCounts.find(c=>c.label==="Coaching").n; if(coach===0) insights.push("No director lists Coaching as a go-to style. It is the most underused style in most leadership groups and a strong lever for physician retention."); }
+  $("#dashboard").innerHTML = `<div class="btnrow" style="justify-content:space-between"><h1 style="margin:0">Coach dashboard</h1><span class="pill">Stored only in this browser</span></div>
+  <p class="lead">Manage your roster, view each director's results, and collect results by importing the files directors export.</p>
+  <div class="grid" style="margin-bottom:16px;grid-template-columns:repeat(auto-fit,minmax(140px,1fr))">
+    <div class="stat"><div class="n">${ds.length}</div><div class="l">Directors on roster</div></div>
+    <div class="stat"><div class="n">${nD}</div><div class="l">DISC-style completed</div></div>
+    <div class="stat"><div class="n">${nL}</div><div class="l">Leadership completed</div></div>
+    <div class="stat"><div class="n">${nB}</div><div class="l">Both completed</div></div>
+  </div>
+
+  <div class="card"><h2 style="font-size:1.2rem">Roster</h2><p class="small muted">Edit names directly; changes save when you leave the field. "Work as" switches the active profile so you can view or enter results for that director.</p>
+  <div class="tablewrap"><table><caption class="sr-only">Director roster and results</caption>
+    <thead><tr><th scope="col">#</th><th scope="col">Name</th><th scope="col">DISC style</th><th scope="col">Leadership go-to</th><th scope="col">Updated</th><th scope="col"><span class="sr-only">Actions</span></th></tr></thead>
+    <tbody>${ds.map((d,i)=>`<tr class="${d.id===state.activeId?"isactive":""}">
+      <td>${i+1}</td>
+      <td><input type="text" value="${esc(d.name)}" data-rename="${d.id}" aria-label="Name for roster entry ${i+1}"></td>
+      <td>${d.disc?`<span class="btnrow" style="gap:4px;flex-wrap:nowrap"><span class="typechip bg-${d.disc.primary}" style="width:26px;height:26px;font-size:.85rem;border-radius:7px" title="Primary: ${DISC[d.disc.primary].name}">${d.disc.primary}</span><span class="typechip bg-${d.disc.secondary}" style="width:22px;height:22px;font-size:.75rem;border-radius:6px;opacity:.8" title="Secondary: ${DISC[d.disc.secondary].name}">${d.disc.secondary}</span><span class="small">${DISC[d.disc.primary].name}</span></span>`:`<span class="pill todo">Not yet</span>`}</td>
+      <td>${d.lead?`<span class="small">${esc(d.lead.top.join(", "))}</span>`:`<span class="pill todo">Not yet</span>`}</td>
+      <td class="small muted">${fmtDate(d.updated)}</td>
+      <td><div class="btnrow" style="flex-wrap:nowrap;gap:4px">
+        <button class="btn secondary sm" data-action="set-active" data-id="${d.id}"${d.id===state.activeId?" disabled":""}>${d.id===state.activeId?"Active":"Work as"}</button>
+        <button class="btn ghost sm" data-action="view-profile" data-id="${d.id}">Profile</button>
+        <button class="btn ghost sm" data-action="clear-results" data-id="${d.id}" aria-label="Clear results for ${esc(d.name)}"${d.disc||d.lead?"":" disabled"}>Clear</button>
+        <button class="btn ghost sm" data-action="remove-dir" data-id="${d.id}" aria-label="Remove ${esc(d.name)} from roster">Remove</button></div></td>
+    </tr>`).join("")}</tbody></table></div>
+  <div class="btnrow" style="margin-top:12px"><button class="btn secondary sm" data-action="add-dir">+ Add director</button></div></div>
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h2 style="font-size:1.2rem">Team DISC mix</h2><p class="small muted">Primary style counts (${nD} completed).</p>${countChart(discCounts)}</div>
+    <div class="card"><h2 style="font-size:1.2rem">Go-to leadership styles</h2><p class="small muted">Directors with each style in their top results (${nL} completed).</p>${countChart(leadCounts)}</div>
+  </div>
+  ${insights.length?`<div class="card"><h2 style="font-size:1.2rem">Team patterns to explore</h2>${list(insights)}</div>`:`<p class="small muted" style="margin-top:12px">Team patterns appear once at least three directors have completed an assessment.</p>`}
+
+  <div class="grid g2" style="margin-top:16px">
+    <div class="card"><h2 style="font-size:1.2rem">Collect and back up results</h2>
+      <ol class="small"><li>Share this site (GitHub Pages link or the HTML file) with each director.</li><li>They choose or type their name, complete both assessments, then click <strong>Export my results</strong> on My Profile and email you the file.</li><li>Click <strong>Import results</strong> and select one or more files. Results merge by name into your roster.</li></ol>
+      <div class="btnrow"><button class="btn" data-action="import-merge">Import results</button><button class="btn secondary" data-action="export-all">Export all (JSON backup)</button><button class="btn secondary" data-action="export-csv">Export CSV</button></div>
+      <hr class="sep"><div class="btnrow"><button class="btn secondary sm" data-action="import-replace">Restore from backup (replaces all)</button><button class="btn danger sm" data-action="reset-all">Erase all data</button></div>
+      <input type="file" id="importFile" accept="application/json,.json" multiple hidden>
+    </div>
+    <div class="card"><h2 style="font-size:1.2rem">Settings</h2>
+      <label for="orgInput" style="font-weight:600">Organization name</label>
+      <div class="btnrow" style="margin-top:6px"><input type="text" id="orgInput" value="${esc(orgName())}" style="flex:1;min-width:180px"><button class="btn secondary sm" data-action="save-org">Save</button>${state.orgOverride?`<button class="btn ghost sm" data-action="reset-org">Use file default</button>`:""}</div>
+      <p class="small muted">To change the default for everyone, edit <code>ORG_NAME</code> at the top of index.html.</p>
+      <p class="note small"><strong>Privacy:</strong> No data leaves this browser unless you export it. Clearing browser data erases results, so export a backup after each import session. Treat exported files as confidential coaching records.</p>
+    </div>
+  </div>`;
+}
+
+/* ---------- Import / export ---------- */
+function download(name, text, type){
+  const blob=new Blob([text],{type:type||"application/json"}), a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download=name; document.body.appendChild(a); a.click();
+  setTimeout(()=>{URL.revokeObjectURL(a.href); a.remove();},500);
+}
+const today=()=>new Date().toISOString().slice(0,10);
+function cleanDirector(d){
+  if(!d || typeof d!=="object" || typeof d.name!=="string") return null;
+  const okDisc = r => r && DISC_ORDER.includes(r.primary) && DISC_ORDER.includes(r.secondary) && r.pct && r.raw ? r : null;
+  const okLead = r => r && Array.isArray(r.top) && r.top.every(s=>LEAD_ORDER.includes(s)) && Array.isArray(r.low) && Array.isArray(r.ranked) && r.pct && r.raw ? r : null;
+  return {id: typeof d.id==="string"?d.id:uid(), name:d.name.trim().slice(0,80)||"Unnamed director", disc:okDisc(d.disc), lead:okLead(d.lead),
+          practice:cleanPractice(d.practice), notes:typeof d.notes==="string"?d.notes:"", updated:d.updated||null};
+}
+function cleanPractice(pr){
+  const out={}; if(!pr || typeof pr!=="object") return out;
+  SCENARIOS.forEach(s=>{ const v=pr[s.id]; if(v && typeof v==="object"){
+    const arr=a=>Array.isArray(a)?a.map(x=>typeof x==="string"?x:""):[];
+    out[s.id]={r:arr(v.r), q:arr(v.q)}; } });
+  return out;
+}
+function extractDirectors(obj){
+  if(obj && Array.isArray(obj.directors)) return obj.directors;
+  if(obj && obj.director) return [obj.director];
+  if(Array.isArray(obj)) return obj;
+  return [];
+}
+const isPlaceholder = d => /^Director \d+$/.test(d.name) && !d.disc && !d.lead;
+function mergeDirector(inc){
+  const norm=s=>s.trim().toLowerCase();
+  let ex = state.directors.find(d=>d.id===inc.id) || state.directors.find(d=>norm(d.name)===norm(inc.name));
+  let how="updated";
+  if(!ex){ ex=state.directors.find(isPlaceholder); if(ex){ ex.name=inc.name; how="added"; } else { ex=newDirector(inc.name); state.directors.push(ex); how="added"; } }
+  const newer=(a,b)=>!b || (a && (a.date||"")>=(b.date||""));
+  if(inc.disc && newer(inc.disc,ex.disc)) ex.disc=inc.disc;
+  if(inc.lead && newer(inc.lead,ex.lead)) ex.lead=inc.lead;
+  Object.assign(ex.practice, inc.practice);
+  if(inc.notes && !ex.notes) ex.notes=inc.notes;
+  if((inc.updated||"")>(ex.updated||"")) ex.updated=inc.updated;
+  return how;
+}
+let importMode="merge";
+async function handleImport(files){
+  const all=[];
+  for(const f of files){
+    try{ const obj=JSON.parse(await f.text()); extractDirectors(obj).map(cleanDirector).filter(Boolean).forEach(d=>all.push({d,obj})); }
+    catch(e){ toast("Could not read "+f.name+". Is it a valid export file?"); return; }
+  }
+  if(!all.length){ toast("No director results found in the selected file."); return; }
+  if(importMode==="replace"){
+    if(!confirm("Replace ALL current roster data with this backup ("+all.length+" directors)? This cannot be undone.")) return;
+    const src=all[0].obj; state.directors=all.map(x=>x.d); state.activeId=state.directors[0].id; state.drafts={};
+    if(src && typeof src.orgOverride==="string") state.orgOverride=src.orgOverride;
+    save(); render(ui.panel); toast("Restored "+all.length+" directors from backup."); return;
+  }
+  let added=0, updated=0; all.forEach(x=>{ mergeDirector(x.d)==="added"?added++:updated++; });
+  save(); render(ui.panel); toast(`Import complete: ${added} added, ${updated} updated.`);
+}
+function exportAll(){ download(`director-coaching-backup-${today()}.json`, JSON.stringify({type:"md-coaching-full", exported:new Date().toISOString(), orgOverride:state.orgOverride, directors:state.directors},null,2)); }
+function exportMe(){ const p=active();
+  if(/^Director \d+$/.test(p.name)){ const v=(prompt("Please enter your name so your coach can match your results:","")||"").trim(); if(!v){ toast("Export cancelled. Add your name first."); return; } p.name=v.slice(0,80); save(); renderChrome(); }
+  download(`director-results-${slug(p.name)}-${today()}.json`, JSON.stringify({type:"md-coaching-director", exported:new Date().toISOString(), director:p},null,2)); toast("Exported. Send this file to your coach."); }
+function exportCSV(){
+  const q=v=>`"${String(v==null?"":v).replace(/"/g,'""')}"`;
+  const head=["Name","DISC primary","DISC secondary","D %","I %","S %","C %","DISC date","Leadership go-to",...LEAD_ORDER.map(s=>s+" %"),"Leadership date"];
+  const rows=state.directors.map(d=>[d.name, d.disc?DISC[d.disc.primary].name:"", d.disc?DISC[d.disc.secondary].name:"", ...DISC_ORDER.map(t=>d.disc?d.disc.pct[t]:""), d.disc?d.disc.date.slice(0,10):"",
+    d.lead?d.lead.top.join("; "):"", ...LEAD_ORDER.map(s=>d.lead?d.lead.pct[s]:""), d.lead?d.lead.date.slice(0,10):""]);
+  download(`director-coaching-summary-${today()}.csv`, [head,...rows].map(r=>r.map(q).join(",")).join("\r\n"), "text/csv");
+}
+
+/* ---------- Event delegation ---------- */
+document.addEventListener("click",e=>{
+  const g=e.target.closest("[data-go]"); if(g){ e.preventDefault(); show(g.dataset.go); return; }
+  const b=e.target.closest("[data-action]"); if(!b) return;
+  const a=b.dataset.action, id=b.dataset.id;
+  switch(a){
+    case "retake": ui.retake[b.dataset.key]=true; render(ui.panel); window.scrollTo({top:0}); break;
+    case "cancel-retake": ui.retake[b.dataset.key]=false; render(ui.panel); break;
+    case "rename-active": { const v=$("#homeName").value.trim(); if(!v){toast("Please enter a name.");break;} active().name=v.slice(0,80); save(); render("home"); toast("Name saved."); break; }
+    case "set-active": state.activeId=id; ui.retake={disc:false,lead:false}; save(); render(ui.panel); toast("Now working as "+active().name); break;
+    case "view-profile": state.activeId=id; save(); show("profile"); break;
+    case "clear-results": { const d=byId(id); if(d && confirm("Clear all assessment results and practice notes for "+d.name+"?")){ d.disc=null; d.lead=null; d.practice={}; d.notes=""; d.updated=null; delete state.drafts[id]; save(); render(ui.panel); toast("Results cleared."); } break; }
+    case "remove-dir": { const d=byId(id); if(state.directors.length<=1){toast("The roster needs at least one entry.");break;}
+      if(d && confirm("Remove "+d.name+" and their results from the roster?")){ state.directors=state.directors.filter(x=>x.id!==id); delete state.drafts[id]; if(state.activeId===id) state.activeId=state.directors[0].id; save(); render(ui.panel); } break; }
+    case "add-dir": { const d=newDirector("Director "+(state.directors.length+1)); state.directors.push(d); save(); render(ui.panel); const inp=$(`[data-rename="${d.id}"]`); if(inp){inp.focus();inp.select();} break; }
+    case "export-all": exportAll(); break;
+    case "export-csv": exportCSV(); break;
+    case "export-me": exportMe(); break;
+    case "import-merge": importMode="merge"; $("#importFile").click(); break;
+    case "import-replace": importMode="replace"; $("#importFile").click(); break;
+    case "reset-all": if(confirm("Erase ALL roster names, results, and notes from this browser? Export a backup first if you need one.") && confirm("Are you sure? This cannot be undone.")){ state=defaultState(); save(); render(ui.panel); toast("All data erased."); } break;
+    case "save-org": state.orgOverride=$("#orgInput").value.trim(); save(); render(ui.panel); toast("Organization name saved."); break;
+    case "reset-org": state.orgOverride=""; save(); render(ui.panel); break;
+    case "print": window.print(); break;
+    case "scen": ui.scen=id; render("conversations"); { const h=$(".scenlist [aria-pressed=true]"); if(h) h.focus(); } break;
+    case "scen-type": ui.scenType=b.dataset.t; render("conversations"); { const h=$(`.seg [data-t="${b.dataset.t}"]`); if(h) h.focus(); } break;
+    case "toggle-model": { const k=b.dataset.k; ui.shown[k]=!ui.shown[k]; render("conversations"); const h=$(`[data-k="${k}"]`); if(h) h.focus(); break; }
+  }
+});
+document.addEventListener("change",e=>{
+  const t=e.target;
+  if(t.dataset.quiz){ const key=t.dataset.quiz, i=t.dataset.i; getDraft(key)[i]=+t.value; save(); const f=t.closest("fieldset"); f.classList.add("answered"); f.classList.remove("missing"); updateProgress(key); return; }
+  if(t.dataset.rename){ const d=byId(t.dataset.rename), v=t.value.trim(); if(d){ if(v){ d.name=v.slice(0,80); save(); renderChrome(); } else t.value=d.name; } return; }
+  if(t.id==="importFile"){ if(t.files.length) handleImport(Array.from(t.files)); t.value=""; }
+});
+let saveTimer;
+document.addEventListener("input",e=>{
+  const t=e.target;
+  if(t.dataset.prac){ const [sid,kind,i]=t.dataset.prac.split("|"); prac(sid)[kind][+i]=t.value;
+    clearTimeout(saveTimer); saveTimer=setTimeout(()=>{ save(); const m=$("#pracSaved"); if(m) m.textContent="Practice notes saved in this browser."; },400); }
+  if(t.dataset.notes){ active().notes=t.value; clearTimeout(saveTimer); saveTimer=setTimeout(()=>{ save(); const m=$("#notesSaved"); if(m) m.textContent="Saved."; },400); }
+});
+
+/* ---------- Init ---------- */
+save();
+const start=location.hash.slice(1);
+show(PANELS.includes(start)?start:"home",{scroll:false});
+})();
+</script>
+</body>
+</html>
